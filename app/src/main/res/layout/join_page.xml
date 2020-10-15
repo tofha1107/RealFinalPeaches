@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JoinPage">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:background="@color/colorLightBeige"></LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanumbarunpenb"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:text="회원 가입"
+            android:textColor="#F06292"
+            android:textSize="50sp"
+            tools:layout_editor_absoluteX="139dp"
+            tools:layout_editor_absoluteY="74dp"
+            android:background="@color/colorLightBeige"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:gravity="center_horizontal"
+                    android:text="닉네임"
+                    android:textSize="20sp"
+                    android:background="@color/colorLightBeige"/>
+
+
+                <EditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:hint="10자 이내로 입력해주세용"
+                    android:inputType="textPersonName"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:gravity="center_horizontal"
+                    android:text="비밀번호"
+                    android:textSize="20sp"
+                    android:background="@color/colorLightBeige"/>
+
+                <EditText
+                    android:id="@+id/edt_pw"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:hint="20자 이내로 설정해주세용"
+                    android:inputType="textPassword" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="255dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:foregroundGravity="center_vertical|center_horizontal"
+                    android:gravity="center"
+                    android:text="성별"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:background="@color/colorLightBeige"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@color/colorLightBeige">
+
+                    <RadioGroup
+                        android:id="@+id/radio_gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:background="@color/colorLightBeige">
+
+                        <RadioButton
+                            android:id="@+id/radio_male"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textStyle="bold"
+                            android:text="남성"
+                            android:textColor="@color/colorRadioGray"
+                            android:textSize="15sp"
+                            android:background="@color/colorLightBeige"/>
+
+                        <RadioButton
+                            android:id="@+id/radio_female"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|center_horizontal"
+                            android:fontFamily="@font/nanumbarunpenb"
+                            android:textColor="@color/colorRadioGray"
+                            android:textStyle="bold"
+                            android:text="여성"
+                            android:textSize="15sp"
+                            android:background="@color/colorLightBeige"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige"
+                ></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+                <TextView
+                    android:id="@+id/textview5"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:gravity="center_horizontal"
+                    android:text="생년월일"
+                    android:textSize="20sp"
+                    android:background="@color/colorLightBeige"/>
+
+                <EditText
+                    android:id="@+id/edt_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="ex) 20140101"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="31dp"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorLightBeige">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:gravity="center_horizontal"
+                    android:text="이메일주소"
+                    android:textSize="20sp"
+                    android:background="@color/colorLightBeige"/>
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="ex) peach@naver.com"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorLightBeige">
+
+                <Button
+                    android:id="@+id/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="76dp"
+                    android:background="@drawable/mybutton"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:text="취소하기"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.497" />
+
+                <Button
+                    android:id="@+id/join_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginEnd="76dp"
+                    android:background="@drawable/mybutton"
+                    android:fontFamily="@font/nanumbarunpenb"
+                    android:text="가입하기"
+                    android:textColor="#F06292"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.497" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
