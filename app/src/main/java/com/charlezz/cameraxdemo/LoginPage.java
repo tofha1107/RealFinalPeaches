@@ -1,6 +1,7 @@
 package com.charlezz.cameraxdemo;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -65,7 +66,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             delayHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                   final Intent  intent = new Intent(LoginPage.this, MainPage.class);
+                   final Intent  intent = new Intent(LoginPage.this, JoinPage.class);
                     startActivity(intent);
                 }
             }, 500);
