@@ -1,11 +1,15 @@
 package com.charlezz.cameraxdemo
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Matrix
+import android.graphics.*
+import android.media.Image
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.util.Base64
 import android.util.Log
 import android.util.Rational
 import android.util.Size
@@ -17,7 +21,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.android.volley.AuthFailureError
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_main.*
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
 
@@ -27,6 +39,18 @@ private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewFinder: TextureView
+
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: MainActivity? = null
+
+        fun context() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     private fun startCamera() {
         //미리보기 설정 시작
@@ -127,6 +151,14 @@ class MainActivity : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
+
+        test.setOnClickListener{
+
+            test2.setText("sadf");
+           val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent);
+        }
+
     }
 
     override fun onRequestPermissionsResult(
@@ -166,10 +198,71 @@ class MainActivity : AppCompatActivity() {
             return data // 바이트 배열 반환함
         }
 
+        private fun Image.toBitmap(): Bitmap {
+            val yBuffer = planes[0].buffer // Y
+            val uBuffer = planes[1].buffer // U
+            val vBuffer = planes[2].buffer // V
+
+            val ySize = yBuffer.remaining()
+            val uSize = uBuffer.remaining()
+            val vSize = vBuffer.remaining()
+
+            val nv21 = ByteArray(ySize + uSize + vSize)
+
+            //U and V are swapped
+            yBuffer.get(nv21, 0, ySize)
+            vBuffer.get(nv21, ySize, vSize)
+            uBuffer.get(nv21, ySize + vSize, uSize)
+
+            val yuvImage = YuvImage(nv21, ImageFormat.NV21, this.width, this.height, null)
+            val out = ByteArrayOutputStream()
+            yuvImage.compressToJpeg(Rect(0, 0, yuvImage.width, yuvImage.height), 50, out)
+            val imageBytes = out.toByteArray()
+            return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+        }
+
         override fun analyze(image: ImageProxy, rotationDegrees: Int) {
             val currentTimestamp = System.currentTimeMillis()
             // 매프레임을 계산하진 않고 1초마다 한번씩 정도 계산
-            if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
+            // if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
+            if (currentTimestamp - lastAnalyzedTimestamp >= 1000) {
+                var imgFormat = image.format
+                Log.d("CameraXApp", "imgFormat: $imgFormat")
+
+                var imgBitmap:Bitmap = image.image!!.toBitmap()
+
+                var out:ByteArrayOutputStream = ByteArrayOutputStream();
+                imgBitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
+                var b:ByteArray = out.toByteArray()
+                var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
+
+                val queue = Volley.newRequestQueue(MainActivity.context())
+                val url = "http://172.30.1.45:9000/re"
+
+                // Request a string response from the provided URL.
+                val stringRequest = object : StringRequest(Request.Method.POST, url,
+                        Response.Listener<String> { response ->
+                            // Display the first 500 characters of the response string.
+                            Log.d("CameraXApp", "Response is: ${response}")
+                        },
+                        Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
+                {
+                    @Throws(AuthFailureError::class)
+                    override fun getParams() : Map<String,String> {
+                        val params: MutableMap<String, String> = HashMap()
+                        params["img"] = imageEncoded
+                        return params
+                    }
+                }
+
+
+                // Add the request to the RequestQueue.
+                queue.add(stringRequest)
+
+
+                Log.d("CameraXApp", "height: ${imgBitmap.height}")
+                Log.d("CameraXApp", "width: ${imgBitmap.width}")
+
                 // 이미지 포맷이 YUV이므로 image.planes[0]으로 Y값을 구할수 있다.
                 val buffer = image.planes[0].buffer
                 // 이미지 데이터를 바이트배열로 추출
