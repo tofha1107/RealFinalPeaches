@@ -5,7 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorLightPink">#E5AFE2</color>
     <color name="colorLikeGray">#E3ECF1</color>
+    <color name="colorDarkGray">#333333</color>
     <color name="colorLightBeige">#FDFBF5</color>
-    <color name="colorTitlePink">#F06292</color>
+    <color name="colorTitlePink">#E47C78</color>
     <color name="colorRadioGray">#7B7373</color>
 </resources>
