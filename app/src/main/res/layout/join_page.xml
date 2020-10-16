@@ -23,14 +23,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:background="@color/colorLightBeige"
             android:orientation="horizontal"></LinearLayout>
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorLightBeige"
             android:fontFamily="@font/nanumbarunpenb"
             android:gravity="center_horizontal"
             android:text="회원 가입"
@@ -48,13 +46,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
                 <TextView
@@ -62,7 +58,6 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:fontFamily="@font/nanumbarunpenb"
                     android:gravity="center_horizontal"
                     android:text="닉네임"
@@ -84,13 +79,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
                 <TextView
@@ -98,7 +91,6 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:fontFamily="@font/nanumbarunpenb"
                     android:gravity="center_horizontal"
                     android:text="비밀번호"
@@ -119,7 +111,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
             </LinearLayout>
@@ -127,7 +118,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
                 <TextView
@@ -135,7 +125,6 @@
                     android:layout_width="255dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:fontFamily="@font/nanumbarunpenb"
                     android:foregroundGravity="center_vertical|center_horizontal"
                     android:gravity="center"
@@ -147,14 +136,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:orientation="horizontal">
 
                     <RadioGroup
                         android:id="@+id/radio_gender"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorLightBeige"
                         android:orientation="horizontal">
 
                         <RadioButton
@@ -162,7 +149,6 @@
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:background="@color/colorLightBeige"
                             android:fontFamily="@font/nanumbarunpenb"
                             android:text="남성"
                             android:textColor="@color/colorRadioGray"
@@ -174,7 +160,6 @@
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:background="@color/colorLightBeige"
                             android:fontFamily="@font/nanumbarunpenb"
                             android:text="여성"
                             android:textColor="@color/colorRadioGray"
@@ -191,13 +176,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
                 <TextView
@@ -205,7 +188,6 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:fontFamily="@font/nanumbarunpenb"
                     android:gravity="center_horizontal"
                     android:text="생년월일"
@@ -225,13 +207,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="31dp"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorLightBeige"
                 android:orientation="horizontal">
 
                 <TextView
@@ -239,7 +219,6 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/colorLightBeige"
                     android:fontFamily="@font/nanumbarunpenb"
                     android:gravity="center_horizontal"
                     android:text="이메일주소"
@@ -257,8 +236,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorLightBeige">
+                android:layout_height="match_parent">
 
                 <Button
                     android:id="@+id/cancel_button"
