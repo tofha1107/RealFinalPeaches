@@ -6,4 +6,12 @@
         android:font="@font/nanumbarunpenb"/>
 
 
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/tmoneyroundwindextrabold"/>
+
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/tmoneyroundwindregular"/>
+
 </font-family>
