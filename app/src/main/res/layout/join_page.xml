@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.charlezz.cameraxdemo.JoinPage">
+    tools:context="com.charlezz.cameraxdemo.JoinPage"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -22,30 +23,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="26dp"
             android:orientation="horizontal"></LinearLayout>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanumbarunpenb"
-            android:gravity="center_horizontal"
-            android:text="회원 가입"
-            android:textColor="#F06292"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="139dp"
-            tools:layout_editor_absoluteY="74dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="163dp"
+                app:srcCompat="@drawable/eyesafe_join" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="26dp"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
@@ -58,7 +52,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
                     android:gravity="center_horizontal"
                     android:text="닉네임"
                     android:textSize="20sp" />
@@ -70,15 +64,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:fontFamily="@font/nanumbarunpenb"
-                    android:hint="10자 이내로 입력해주세용"
+                    android:fontFamily="@font/tmoneyroundwindregular"
+                    android:hint="  10자 이내"
                     android:inputType="textPersonName" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_height="13dp"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
@@ -91,7 +85,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
                     android:gravity="center_horizontal"
                     android:text="비밀번호"
                     android:textSize="20sp" />
@@ -102,15 +96,15 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:fontFamily="@font/nanumbarunpenb"
-                    android:hint="20자 이내로 설정해주세용"
+                    android:fontFamily="@font/tmoneyroundwindregular"
+                    android:hint="  20자 이내"
                     android:inputType="textPassword" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_height="13dp"
                 android:orientation="horizontal">
 
             </LinearLayout>
@@ -125,7 +119,7 @@
                     android:layout_width="255dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
                     android:foregroundGravity="center_vertical|center_horizontal"
                     android:gravity="center"
                     android:text="성별"
@@ -149,10 +143,10 @@
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:fontFamily="@font/nanumbarunpenb"
+                            android:fontFamily="@font/tmoneyroundwindregular"
                             android:text="남성"
                             android:textColor="@color/colorRadioGray"
-                            android:textSize="15sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                         <RadioButton
@@ -160,10 +154,10 @@
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical|center_horizontal"
-                            android:fontFamily="@font/nanumbarunpenb"
+                            android:fontFamily="@font/tmoneyroundwindregular"
                             android:text="여성"
                             android:textColor="@color/colorRadioGray"
-                            android:textSize="15sp"
+                            android:textSize="16sp"
                             android:textStyle="bold" />
 
                     </RadioGroup>
@@ -175,7 +169,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_height="13dp"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
@@ -188,25 +182,25 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
                     android:gravity="center_horizontal"
                     android:text="생년월일"
                     android:textSize="20sp" />
 
                 <EditText
                     android:id="@+id/edt_birth"
-                    android:layout_width="wrap_content"
+                    android:layout_width="209dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindregular"
                     android:hint="ex) 20140101"
                     android:inputType="textPersonName" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="31dp"
+                android:layout_height="13dp"
                 android:orientation="horizontal"></LinearLayout>
 
             <LinearLayout
@@ -219,7 +213,7 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/nanumbarunpenb"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
                     android:gravity="center_horizontal"
                     android:text="이메일주소"
                     android:textSize="20sp" />
@@ -230,6 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:fontFamily="@font/tmoneyroundwindregular"
                     android:hint="ex) peach@naver.com"
                     android:inputType="textPersonName" />
             </LinearLayout>
@@ -242,30 +237,21 @@
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginStart="76dp"
-                    android:background="@drawable/mybutton"
-                    android:fontFamily="@font/nanumbarunpenb"
-                    android:text="취소하기"
+                    android:layout_marginStart="84dp"
+                    android:background="@drawable/full_pink_button"
+                    android:text="Button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.497" />
+                    app:layout_constraintVertical_bias="0.476" />
 
                 <Button
                     android:id="@+id/join_button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginEnd="76dp"
-                    android:background="@drawable/mybutton"
-                    android:fontFamily="@font/nanumbarunpenb"
-                    android:text="가입하기"
-                    android:textColor="#F06292"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.497" />
+                    android:text="Button"
+                    tools:layout_editor_absoluteX="284dp"
+                    tools:layout_editor_absoluteY="81dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
