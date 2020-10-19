@@ -26,15 +26,15 @@
         android:id="@+id/imageView2"
         android:layout_width="127dp"
         android:layout_height="108dp"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/face_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.06"
-        app:srcCompat="@drawable/peach" />
+        app:srcCompat="@drawable/basic_peach" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/face_button"
         android:layout_width="409dp"
         android:layout_height="67dp"
         android:background="@color/colorTitlePink"
@@ -61,7 +61,7 @@
         android:textColor="@color/colorTitlePink"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="@+id/face_button"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -84,8 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:text="를 사용하기 위해"
         android:textColor="@color/colorDarkGray"
@@ -137,6 +136,10 @@
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
