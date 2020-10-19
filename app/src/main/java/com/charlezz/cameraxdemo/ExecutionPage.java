@@ -10,26 +10,47 @@ import java.util.Locale;
 
 public class ExecutionPage extends AppCompatActivity {
 
+    //MILLISINFUTURE과 COUNT 함께 설정
+
+    private static final int MILLISINFUTURE = 5*1000;
+    private static final int COUNT_DOWN_INTERVAL = 1000;
+
+    private int count = 5;
+    private TextView using_time_view ;
+    private CountDownTimer countDownTimer;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
+
+        using_time_view = (TextView)findViewById(R.id.using_time_view);
+        countDownTimer();
+        countDownTimer.start();
+
     }
 
-    //long millisInFuture	타이머가 실행될 총 지속 시간입니다 (예 : 미래의 어느 정도까지 타이머를 끝내기를 원하십니까). 밀리 초 단위. 1000밀리초 = 1초
-    //long countDownInterval	타이머 업데이트를 받으려는 간격. 밀리 초 단위.
-    //long millisUntilFinished	onTick() 남은 시간을 알려주는 onTick() 제공된 매개 변수입니다. 밀리 초 단위
+    public void countDownTimer(){
 
-    TextView textView = (TextView)findViewById(R.id.using_time_view);
+        countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
+            public void onTick(long millisUntilFinished) {
+                using_time_view.setText(String.valueOf(count));
+                count --;
+            }
+            public void onFinish() {
+                using_time_view.setText(String.valueOf("시간 끝~~!!"));
+            }
+        };
+    }
 
-    CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
-        public void onTick(long millisUntilFinished) {
-            textView.setText(String.format(Locale.getDefault(), "%d sec.", millisUntilFinished / 1000L));
-        }
-
-        public void onFinish() {
-            textView.setText("Done.");
-        }
-    }.start();
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        try{
+            countDownTimer.cancel();
+        } catch (Exception e) {}
+        countDownTimer=null;
+    }
 
 }

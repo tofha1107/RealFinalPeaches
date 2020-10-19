@@ -23,14 +23,18 @@
 
         </activity>
         <activity android:name=".ExecutionPage">
+
+        </activity>
+        <activity android:name=".EyePage"></activity>
+        <activity android:name=".JoinPage">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".EyePage"></activity>
-        <activity android:name=".JoinPage"></activity>
         <activity android:name=".LoginPage">
 
         </activity>
