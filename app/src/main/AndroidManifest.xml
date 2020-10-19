@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,31 +18,34 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".CameraPage"></activity>
         <activity android:name=".DistsancePage">
-
-
-
         </activity>
         <activity android:name=".ExecBeforePageActivity">
-
         </activity>
         <activity android:name=".ExecutionPage">
-
         </activity>
         <activity android:name=".EyePage"></activity>
         <activity android:name=".JoinPage">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".LoginPage">
 
         </activity>
         <activity android:name=".MainActivity2"></activity>
         <activity android:name=".MainActivity"></activity>
+        <activity android:name=".alterFunc">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".audioRecord"
+            android:theme="@style/Theme.AppCompat.Dialog"/>
+        <activity android:name=".step4_record">
+
+        </activity>
     </application>
 
 </manifest>
