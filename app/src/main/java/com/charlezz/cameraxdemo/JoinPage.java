@@ -40,10 +40,10 @@ public class JoinPage extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.join_page);
 
         join_button2 = (Button)findViewById(R.id.join_button2);
-        cancel_button = (Button)findViewById(R.id.cancel_button);
+        //cancel_button = (Button)findViewById(R.id.cancel_button);
 
         join_button2.setOnClickListener(this);
-        cancel_button.setOnClickListener(this);
+        //cancel_button.setOnClickListener(this);
 
         edt_name = (EditText)findViewById(R.id.edt_name);
         edt_pw = (EditText)findViewById(R.id.edt_pw);
@@ -71,10 +71,10 @@ public class JoinPage extends AppCompatActivity implements View.OnClickListener 
                 Toast.makeText(this,"빈틈없이 채워주십쇼",Toast.LENGTH_SHORT).show();
             }
 
-        }else if(v.getId() == R.id.cancel_button){
-            intent = new Intent(getApplicationContext(), LoginPage.class);
-            startActivity(intent);
-        }
+        }//else if(v.getId() == R.id.cancel_button){
+            //intent = new Intent(getApplicationContext(), LoginPage.class);
+            //startActivity(intent);
+        //}
 
     }
 

@@ -234,24 +234,19 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/cancel_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="84dp"
-                    android:background="@drawable/full_pink_button"
-                    android:text="Button"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.476" />
-
-                <Button
                     android:id="@+id/join_button2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
-                    tools:layout_editor_absoluteX="284dp"
-                    tools:layout_editor_absoluteY="81dp" />
+                    android:background="@color/colorTitlePink"
+                    android:fontFamily="@font/tmoneyroundwindextrabold"
+                    android:text="가입하기"
+                    android:textColor="@color/colorLightBeige"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
