@@ -14,15 +14,23 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".EyePage"></activity>
+        <activity android:name=".CameraPage"></activity>
+        <activity android:name=".DistsancePage"></activity>
+        <activity android:name=".ExecBeforePageActivity"></activity>
         <activity android:name=".MainActivity2" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+
+
+        </activity>
         <activity android:name=".JoinPage" />
         <activity android:name=".LoginPage">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 
