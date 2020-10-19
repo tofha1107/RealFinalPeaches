@@ -28,14 +28,14 @@
         <activity android:name=".EyePage"></activity>
         <activity android:name=".JoinPage">
 
+
+        </activity>
+        <activity android:name=".LoginPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".LoginPage">
 
         </activity>
         <activity android:name=".MainActivity2"></activity>
