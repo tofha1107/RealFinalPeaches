@@ -60,15 +60,26 @@
         app:layout_constraintVertical_bias="0.586" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="197dp"
-        android:layout_height="238dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="104dp"
+        android:id="@+id/imageView7"
+        android:layout_width="198dp"
+        android:layout_height="268dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ipeach1" />
+        app:srcCompat="@drawable/smile_peach" />
 
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="187dp"
+        android:layout_height="71dp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
