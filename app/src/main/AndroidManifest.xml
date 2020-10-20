@@ -20,6 +20,7 @@
         <activity android:name=".DistsancePage">
         </activity>
         <activity android:name=".ExecBeforePageActivity">
+
         </activity>
         <activity android:name=".ExecutionPage">
         </activity>
@@ -37,12 +38,12 @@
         <activity android:name=".exerciseCamera">
 
         </activity>
-        <activity android:name=".alterFunc"/>
-        <activity android:name=".audioRecord"
-            android:theme="@style/Theme.AppCompat.Dialog"
-            />
         <activity android:name=".step4_record">
+
         </activity>
+        <activity android:name=".audioRecord"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            />
         <activity android:name=".LoadingPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -33,8 +33,8 @@
             android:fontFamily="@font/tmoneyroundwindextrabold"
             android:gravity="center_horizontal"
             android:text="눈운동 영상"
-            android:textColor="@color/colorTitlePink"
-            android:textSize="50sp" />
+            android:textColor="@drawable/mybutton_pink"
+            android:textSize="50sp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="426dp"
