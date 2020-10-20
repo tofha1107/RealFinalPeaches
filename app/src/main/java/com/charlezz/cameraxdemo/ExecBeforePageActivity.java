@@ -20,6 +20,8 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     SimpleDateFormat mFormat = new SimpleDateFormat("kk:mm");
     TextView mTextView;
 
+    private Button go_eye;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,9 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         real_start_button.setOnClickListener(this);
         button6.setOnClickListener(this);
+
+        go_eye = (Button) findViewById(R.id.button4);
+        go_eye.setOnClickListener(this);
     }
     private String getTime(){
         mNow = System.currentTimeMillis();
@@ -48,6 +53,9 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
             startActivity(intent);
         }else if(v.getId() == R.id.button6){
             mTextView.setText(getTime());
+        }else if (v.getId() == R.id.button4) {
+            intent = new Intent(this, videoList.class);
+            startActivity(intent);
         }
     }
 
