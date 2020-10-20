@@ -29,16 +29,14 @@
 
     <Button
         android:id="@+id/real_start_button"
-        android:layout_width="462dp"
-        android:layout_height="70dp"
+        android:layout_width="204.5dp"
+        android:layout_height="61dp"
         android:background="@color/colorTitlePink"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="실행하기"
         android:textColor="@color/colorLightBeige"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -62,10 +60,10 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="28dp"
-        android:background="@color/colorTitlePink"
+        android:background="@drawable/mybutton"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="눈 운동 바로가기"
-        android:textColor="@color/colorLightBeige"
+        android:textColor="@color/colorDarkGray"
         app:layout_constraintBottom_toTopOf="@+id/real_start_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -159,4 +157,18 @@
         app:layout_constraintStart_toEndOf="@+id/start_time"
         app:layout_constraintTop_toTopOf="@+id/end_time"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="204.5dp"
+        android:layout_height="61dp"
+        android:background="@color/colorSemiDarkGray"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
+        android:text="다시설정하기"
+        android:textColor="@color/colorLightBeige"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/real_start_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
