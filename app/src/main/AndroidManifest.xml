@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".CameraPage"></activity>
+        <activity android:name=".DistsancePage">
 
-        <activity android:name=".AlarmTest">
+
+
+        </activity>
+        <activity android:name=".ExecBeforePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,21 +27,19 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".CameraPage" />
-        <activity android:name=".DistsancePage"></activity>
-        <activity android:name=".ExecBeforePageActivity"></activity>
         <activity android:name=".ExecutionPage">
 
         </activity>
-        <activity android:name=".EyePage" />
-        <activity android:name=".JoinPage"></activity>
-        <activity android:name=".LoginPage"></activity>
-        <activity android:name=".MainActivity2" />
-        <activity android:name=".MainActivity" />
-        <receiver android:name=".AlarmReciver"></receiver>
-        <service android:name="MyService"></service>
+        <activity android:name=".EyePage"></activity>
+        <activity android:name=".JoinPage">
 
 
+        </activity>
+        <activity android:name=".LoginPage">
+
+        </activity>
+        <activity android:name=".MainActivity2"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

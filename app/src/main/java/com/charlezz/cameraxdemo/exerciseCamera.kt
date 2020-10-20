@@ -29,9 +29,7 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.OutputStream
 import java.nio.ByteBuffer
-import java.util.concurrent.TimeUnit
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
@@ -139,7 +137,7 @@ class exerciseCamera : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.exercise_camera1)
         viewFinder = findViewById(R.id.view_finder)
 
         if (allPermissionsGranted()) {

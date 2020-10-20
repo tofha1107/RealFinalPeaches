@@ -30,12 +30,8 @@ public class alterFunc extends AppCompatActivity {
     String filename;
     public static final int PERMISSION_ALL = 0;
 
-
-
     private final static String TAG = "alterFunc";
     private final static int REQUESTCODE_RINGTONE_PICKER = 1000;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +56,8 @@ public class alterFunc extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(alterFunc.this, audioRecord.class));
-
-
             }
         });
-
-
 
         }
 
