@@ -73,7 +73,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopPlay();
+                ;
             }
         });
 
