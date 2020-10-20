@@ -107,7 +107,6 @@ public class step4_record extends AppCompatActivity implements AutoPermissionsLi
             @Override
             public void onClick(View view) {
 
-
 //                AlertDialog.Builder ad = new AlertDialog.Builder(alertPage.this);
 //
 //                ad.setIcon(R.drawable.ipeach3);
@@ -308,12 +307,6 @@ public class step4_record extends AppCompatActivity implements AutoPermissionsLi
             player.start();
         } catch(Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public void stopPlay() {
-        if (player != null) {
-            player.stop();
         }
     }
 

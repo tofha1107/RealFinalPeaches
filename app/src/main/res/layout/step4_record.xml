@@ -16,8 +16,8 @@
 
         <Button
             android:id="@+id/button8"
-            android:layout_width="116dp"
-            android:layout_height="40dp"
+            android:layout_width="105dp"
+            android:layout_height="39dp"
             android:background="@drawable/bar"
             android:fontFamily="@font/tmoneyroundwindextrabold"
             android:text="STEP. 04"
@@ -188,7 +188,7 @@
         android:layout_height="67dp"
         android:background="@color/colorTitlePink"
         android:fontFamily="@font/tmoneyroundwindextrabold"
-        android:text="알림음을 설정해주세요"
+        android:text="설정완료!"
         android:textColor="@color/colorLightBeige"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
