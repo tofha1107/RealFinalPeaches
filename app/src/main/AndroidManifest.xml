@@ -19,26 +19,24 @@
         <activity android:name=".CameraPage"></activity>
         <activity android:name=".DistsancePage"></activity>
         <activity android:name=".ExecBeforePageActivity">
-
         </activity>
+        <activity android:name=".AlarmPage"></activity>
+
+        <activity android:name=".ClosePage"></activity>
+        <activity android:name=".PwPage"></activity>
         <activity android:name=".ExecutionPage">
         </activity>
         <activity android:name=".EyePage"></activity>
         <activity android:name=".JoinPage">
-
         </activity>
         <activity android:name=".LoginPage">
-
         </activity>
         <activity android:name=".MainActivity2"></activity>
         <activity android:name=".MainActivity">
-
         </activity>
         <activity android:name=".exerciseCamera">
-
         </activity>
         <activity android:name=".step4_record">
-
         </activity>
         <activity android:name=".audioRecord"
             android:theme="@style/Theme.AppCompat.Light.Dialog"

@@ -14,7 +14,7 @@ import java.util.Date;
 public class ExecBeforePageActivity extends AppCompatActivity implements View.OnClickListener {
 
     //현재 button6을 누르면 시각이 바뀜
-    private Button real_start_button, button6;
+    private Button real_start_button, button6, reset_button;
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("kk:mm");
@@ -28,16 +28,28 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exec_before_page);
 
+        Intent intent = getIntent();
+        int time = intent.getExtras().getInt("time");
+        int time2 = intent.getExtras().getInt("time2");
+
 
 
         real_start_button = (Button) findViewById(R.id.real_start_button);
         button6 = (Button) findViewById(R.id.button6);
+        reset_button = (Button) findViewById(R.id.reset_button);
+        button6.setText(String.valueOf(time2));
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
         mTextView.setText(getTime());
 
+
+        TextView end_time = findViewById(R.id.end_time);
+
+
+
         real_start_button.setOnClickListener(this);
         button6.setOnClickListener(this);
+        reset_button.setOnClickListener(this);
 
         go_eye = (Button) findViewById(R.id.button4);
         go_eye.setOnClickListener(this);
@@ -54,8 +66,9 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         if (v.getId() == R.id.real_start_button) {
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
             startActivity(intent);
-        }else if(v.getId() == R.id.button6){
-            mTextView.setText(getTime());
+        }else if(v.getId() == R.id.reset_button){
+            intent = new Intent(getApplicationContext(), DistsancePage.class);
+            startActivity(intent);
         }else if (v.getId() == R.id.button4) {
             intent = new Intent(this, videoList.class);
             startActivity(intent);
