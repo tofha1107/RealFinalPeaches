@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.charlezz.cameraxdemo.step4_record">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DistsancePageActivity"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="116dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bar"
+            android:fontFamily="@font/tmoneyroundwindextrabold"
+            android:text="STEP. 04"
+            android:textColor="@color/colorLightBeige"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.422" />
+
+        <Button
+            android:id="@+id/basic_btn"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="88dp"
+            android:layout_marginBottom="284dp"
+            android:background="@drawable/round"
+            android:fontFamily="@font/tmoneyroundwindextrabold"
+            android:text="기본음
+            사용하기"
+            android:textColor="@color/colorLightBeige"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button8"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/record_btn"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+
+            android:layout_marginEnd="92dp"
+            android:layout_marginBottom="284dp"
+            android:background="@drawable/round"
+            android:fontFamily="@font/tmoneyroundwindextrabold"
+            android:text="녹음하기"
+            android:textColor="@color/colorLightBeige"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button8"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="114dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="196dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:text="엄마 아빠의"
+            android:textColor="@color/colorTitlePink"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="330dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="29dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:text="마지막으로 스마트폰 사용 종료 시,"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="163dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="196dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:text="부드럽게 말해 줄"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0.077"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="102dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="228dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:text="해주세요!"
+            android:textColor="@color/colorDarkGray"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0.188"
+            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="134dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="228dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:text="목소리를 녹음"
+            android:textColor="@color/colorTitlePink"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/textView10"
+            app:layout_constraintHorizontal_bias="0.132"
+            app:layout_constraintStart_toStartOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="260dp"
+            android:layout_height="122dp"
+            android:layout_marginBottom="128dp"
+            android:fontFamily="@font/tmoneyroundwindregular"
+            android:gravity="center"
+            android:text="(예시) \n\n 새롬아 이제 그만보고 \n\n맛있는 까까 먹자~"
+            android:textColor="@color/colorTitlePink"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="127dp"
+            android:layout_height="108dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/peach" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="413dp"
+        android:layout_height="67dp"
+        android:background="@color/colorTitlePink"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
+        android:text="알림음을 설정해주세요"
+        android:textColor="@color/colorLightBeige"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
