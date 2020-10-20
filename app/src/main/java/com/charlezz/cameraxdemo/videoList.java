@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class videoList extends AppCompatActivity implements View.OnClickListener {
-    private Button tajo1_button, tajo2_button, tajo3_button, btn_back;
+    private Button tajo1_button, tajo2_button, tajo3_button;
 
 
     @Override
@@ -26,8 +26,8 @@ public class videoList extends AppCompatActivity implements View.OnClickListener
         tajo3_button = (Button) findViewById(R.id.tajo3_button);
         tajo3_button.setOnClickListener(this);
 
-        btn_back = (Button) findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(this);
+        //btn_back = (Button) findViewById(R.id.btn_back);
+        //btn_back.setOnClickListener(this);
 
     }
 
@@ -45,9 +45,8 @@ public class videoList extends AppCompatActivity implements View.OnClickListener
         } else if (v.getId() == R.id.tajo4_button) {
             Intent intent = new Intent(this, PlayVideo4.class);
             startActivity(intent);
-        } else if (v.getId() == R.id.btn_back) {
-            Intent intent = new Intent(this, ExecBeforePageActivity.class);
-            startActivity(intent);
-        }
+        } //else if (v.getId() == R.id.btn_back) {
+            //Intent intent = new Intent(this, ExecBeforePageActivity.class);
+            //startActivity(intent);}
     }
 }
