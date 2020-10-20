@@ -16,6 +16,8 @@ public class ExecutionPage extends AppCompatActivity {
     private static final int COUNT_DOWN_INTERVAL = 1000;
 
     private int count = 5;
+
+
     private TextView using_time_view ;
     private CountDownTimer countDownTimer;
 

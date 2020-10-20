@@ -15,6 +15,7 @@
         android:layout_marginBottom="80dp"
         android:background="@drawable/mybutton"
         android:fontFamily="@font/nanumbarunpenb"
+        android:textSize="18dp"
         android:text="회원 가입"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,9 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="80dp"
-        android:background="@drawable/mybutton"
+        android:background="@drawable/mybutton_pink"
         android:fontFamily="@font/nanumbarunpenb"
         android:text="로그인"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -37,7 +40,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/nanumbarunpenb"
-        android:hint="비밀번호를 입력하십시오"
+        android:hint="비밀번호 입력칸~~~"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +54,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:fontFamily="@font/nanumbarunpenb"
-        android:hint="아이디를 입력하세요"
+        android:hint="아이디를 입력하세욘"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +64,8 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="198dp"
-        android:layout_height="268dp"
+        android:layout_width="155dp"
+        android:layout_height="245dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -72,8 +75,8 @@
 
     <ImageView
         android:id="@+id/imageView10"
-        android:layout_width="187dp"
-        android:layout_height="71dp"
+        android:layout_width="168dp"
+        android:layout_height="52dp"
         app:layout_constraintBottom_toTopOf="@+id/edt_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
