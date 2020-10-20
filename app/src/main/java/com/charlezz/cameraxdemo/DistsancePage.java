@@ -17,7 +17,6 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.distance_page);
 
         button_choose = (Button)findViewById(R.id.button_choose);
-
         button_choose.setOnClickListener(this);
     }
 
@@ -28,4 +27,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         }
     }
+
+
+
 }

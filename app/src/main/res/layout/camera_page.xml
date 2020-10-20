@@ -56,6 +56,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
+        android:lineSpacingExtra ="5dp"
         android:text="눈과 스마트폰 거리를 측정하기 위해 내 아이 얼굴을 등록해주세요."
         android:textColor="@color/colorTitlePink"
         android:textSize="22sp"
