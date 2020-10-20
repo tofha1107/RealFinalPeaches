@@ -1,7 +1,9 @@
 package com.charlezz.cameraxdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +33,14 @@ public class ExecutionPage extends AppCompatActivity {
         countDownTimer();
         countDownTimer.start();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(ExecutionPage.this, DistsancePage.class);
+                startActivity(intent);
+            }
+        }, 4000);
+
     }
 
     public void countDownTimer(){
@@ -54,5 +64,7 @@ public class ExecutionPage extends AppCompatActivity {
         } catch (Exception e) {}
         countDownTimer=null;
     }
+
+
 
 }
