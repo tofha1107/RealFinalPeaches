@@ -26,7 +26,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.exercise_camera.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.ByteBuffer
@@ -54,7 +54,8 @@ class exerciseCamera : AppCompatActivity() {
         //미리보기 설정 시작
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetAspectRatio(Rational(1, 1))
-            setTargetResolution(Size(640, 640))
+            setTargetResolution(Size(1280, 720))
+
         }.build()
 
         val preview = Preview(previewConfig)
@@ -137,7 +138,7 @@ class exerciseCamera : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exercise_camera1)
+        setContentView(R.layout.exercise_camera)
         viewFinder = findViewById(R.id.view_finder)
 
         if (allPermissionsGranted()) {
@@ -148,13 +149,6 @@ class exerciseCamera : AppCompatActivity() {
 
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
-        }
-
-        test.setOnClickListener{
-
-            test2.setText("sadf");
-           val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent);
         }
 
     }
@@ -234,8 +228,8 @@ class exerciseCamera : AppCompatActivity() {
                 var b:ByteArray = out.toByteArray()
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
-                val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.45:9000/re"
+                val queue = Volley.newRequestQueue(exerciseCamera.context())
+                val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
