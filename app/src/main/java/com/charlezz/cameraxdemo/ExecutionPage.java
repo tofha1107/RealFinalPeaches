@@ -1,14 +1,18 @@
 package com.charlezz.cameraxdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
-public class ExecutionPage extends AppCompatActivity {
+public class ExecutionPage extends AppCompatActivity implements View.OnClickListener {
 
     //MILLISINFUTURE과 COUNT 함께 설정
 
@@ -16,6 +20,8 @@ public class ExecutionPage extends AppCompatActivity {
     private static final int COUNT_DOWN_INTERVAL = 1000;
 
     private int count = 5;
+
+    private Button end_imd_button;
 
 
     private TextView using_time_view ;
@@ -31,6 +37,24 @@ public class ExecutionPage extends AppCompatActivity {
         countDownTimer();
         countDownTimer.start();
 
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(ExecutionPage.this, DistsancePage.class);
+//                startActivity(intent);
+//            }
+//        }, 4000);
+
+        end_imd_button = (Button)findViewById(R.id.end_imd_button);
+        end_imd_button.setOnClickListener(this);
+
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.end_imd_button) {
+            Intent intent = new Intent(getApplicationContext(), ClosePage.class);
+            startActivity(intent);
+        }
     }
 
     public void countDownTimer(){
@@ -54,5 +78,7 @@ public class ExecutionPage extends AppCompatActivity {
         } catch (Exception e) {}
         countDownTimer=null;
     }
+
+
 
 }
