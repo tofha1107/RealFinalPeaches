@@ -28,10 +28,13 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exec_before_page);
 
+
+
         real_start_button = (Button) findViewById(R.id.real_start_button);
         button6 = (Button) findViewById(R.id.button6);
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
+        mTextView.setText(getTime());
 
         real_start_button.setOnClickListener(this);
         button6.setOnClickListener(this);

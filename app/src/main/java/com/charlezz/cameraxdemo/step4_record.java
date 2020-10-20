@@ -49,6 +49,8 @@ public class step4_record extends AppCompatActivity {
 
         });
 
+
+
         record_btnn = findViewById(R.id.record_btn);
         record_btnn.setOnClickListener(new View.OnClickListener() {
 
@@ -58,7 +60,18 @@ public class step4_record extends AppCompatActivity {
             }
         });
 
-        }
+        Button finish_button = findViewById(R.id.set_finish_button);
+        finish_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(step4_record.this, ExecBeforePageActivity.class));
+            }
+        });
+
+    }
+
+
+
 
     @Override
     public void onBackPressed()

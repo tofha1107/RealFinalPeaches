@@ -183,7 +183,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button15"
+        android:id="@+id/set_finish_button"
         android:layout_width="413dp"
         android:layout_height="67dp"
         android:background="@color/colorTitlePink"
