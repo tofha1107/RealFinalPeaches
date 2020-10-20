@@ -16,14 +16,10 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
     //MILLISINFUTURE과 COUNT 함께 설정
 
-    private static final int MILLISINFUTURE = 5*1000;
+    private static final int MILLISINFUTURE = 10*1000;
     private static final int COUNT_DOWN_INTERVAL = 1000;
-
-    private int count = 5;
-
+    private int count = 10;
     private Button end_imd_button;
-
-
     private TextView using_time_view ;
     private CountDownTimer countDownTimer;
 
@@ -37,13 +33,13 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
         countDownTimer();
         countDownTimer.start();
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(ExecutionPage.this, DistsancePage.class);
-//                startActivity(intent);
-//            }
-//        }, 4000);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(ExecutionPage.this, ClosePage.class);
+                startActivity(intent);
+            }
+        }, 10*1000);
 
         end_imd_button = (Button)findViewById(R.id.end_imd_button);
         end_imd_button.setOnClickListener(this);
