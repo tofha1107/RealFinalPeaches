@@ -11,10 +11,10 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
     private Button button_choose2;
 
-    private Button button11;
-    private Button button12;
-    private Button button13;
-    private Button button14;
+    private Button time10;
+    private Button time20;
+    private Button time5;
+    private Button time60;
 
 
     @Override
@@ -25,58 +25,58 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         button_choose2 = (Button)findViewById(R.id.button_choose2);
         button_choose2.setOnClickListener(this);
 
-        button11 = (Button)findViewById(R.id.button11);
-        button11.setOnClickListener(this);
+        time10 = (Button)findViewById(R.id.time10);
+        time10.setOnClickListener(this);
 
-        button12 = (Button)findViewById(R.id.button12);
-        button12.setOnClickListener(this);
+        time20 = (Button)findViewById(R.id.time20);
+        time20.setOnClickListener(this);
 
-        button13 = (Button)findViewById(R.id.button13);
-        button13.setOnClickListener(this);
+        time5 = (Button)findViewById(R.id.time5);
+        time5.setOnClickListener(this);
 
-        button14 = (Button)findViewById(R.id.button14);
-        button14.setOnClickListener(this);
+        time60 = (Button)findViewById(R.id.time60);
+        time60.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_choose2) {
-            Intent intent = new Intent(getApplicationContext(), ExecBeforePageActivity.class);
+            Intent intent = new Intent(getApplicationContext(), step4_record.class);
             startActivity(intent);
         }
 
-        if (v.getId() == R.id.button11) {
+        if (v.getId() == R.id.time5) {
             //btn_choose10.setBackground(Drawable);
-            button11.setBackground(this.getResources().getDrawable(R.drawable.dark_5));
-            button12.setBackground(this.getResources().getDrawable(R.drawable.light_10));
-            button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
-            button14.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            time5.setBackground(this.getResources().getDrawable(R.drawable.dark_5));
+            time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
+            time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
+            time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
 
         }
 
-        if (v.getId() == R.id.button12) {
+        if (v.getId() == R.id.time10) {
             //btn_choose10.setBackground(Drawable);
-            button12.setBackground(this.getResources().getDrawable(R.drawable.dark_10));
-            button11.setBackground(this.getResources().getDrawable(R.drawable.light_5));
-            button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
-            button14.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            time10.setBackground(this.getResources().getDrawable(R.drawable.dark_10));
+            time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
+            time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
+            time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
         }
 
-        if (v.getId() == R.id.button13) {
+        if (v.getId() == R.id.time60) {
             //btn_choose10.setBackground(Drawable);
-            button13.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
-            button11.setBackground(this.getResources().getDrawable(R.drawable.light_5));
-            button14.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            button12.setBackground(this.getResources().getDrawable(R.drawable.light_10));
+            time60.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
+            time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
+            time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
         }
 
-        if (v.getId() == R.id.button14) {
+        if (v.getId() == R.id.time20) {
             //btn_choose10.setBackground(Drawable);
-            button14.setBackground(this.getResources().getDrawable(R.drawable.dark_20));
-            button12.setBackground(this.getResources().getDrawable(R.drawable.light_10));
-            button11.setBackground(this.getResources().getDrawable(R.drawable.light_5));
-            button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
+            time20.setBackground(this.getResources().getDrawable(R.drawable.dark_20));
+            time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
+            time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
+            time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
         }
     }
 
