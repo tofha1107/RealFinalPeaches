@@ -37,6 +37,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     int time;
     int settingTime;
     int moveTime;
+    int real_settingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +50,17 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         moveTime = intent.getExtras().getInt("moveTime");
         settingTime= intent.getExtras().getInt("settingTime");
 
+
+
         real_start_button = (Button) findViewById(R.id.real_start_button);
         button6 = (Button) findViewById(R.id.button6);
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
-        button6.setText(String.valueOf(settingTime));
+
+        real_settingTime = settingTime/60000;
+
+        button6.setText(String.valueOf(real_settingTime + "분"));
+
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
         mTextView.setText(getTime());

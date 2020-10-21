@@ -26,20 +26,21 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     private TextView using_time_view ;
     private CountDownTimer countDownTimer;
     private Timer timer;
+    private Timer timer2;
     Intent intent;
     int time;
+    int moveTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
 
-        //DistsancePage distsancePage = new DistsancePage();
-
+        // 시간설정값 가져오기
         intent = getIntent();
-
-        // 시간설정값
         time = intent.getExtras().getInt("settingTime");
+        // 눈운동 주기 가져오기
+        moveTime = intent.getExtras().getInt("moveTime");
 
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -49,13 +50,27 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
             }
         };
 
+        TimerTask timerTask1 = new TimerTask() {
+            @Override
+            public void run() {
+                intent = new Intent(getApplicationContext(),exerciseCamera.class);
+                startActivity(intent);
+            }
+        };
+
+
         timer = new Timer();
         timer.schedule(timerTask, time);
+
+//        timer2 = new Timer();
+//        timer.schedule(timerTask, moveTime);
         Log.v("타이머","실행");
 
         using_time_view = (TextView)findViewById(R.id.using_time_view);
         countDownTimer();
         countDownTimer.start();
+
+
 
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
