@@ -9,8 +9,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ExecBeforePageActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,16 +32,16 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     TextView mTextView;
 
     private Button go_eye;
-
+    private Timer timer;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exec_before_page);
 
-        Intent intent = getIntent();
-        // 시간설정
-        int time = intent.getIntExtra("settingTime",0);
+        intent = getIntent();
+
        // Log.v("timetimetime",time+"ㅠㅠ");
         int time2 = intent.getIntExtra("moveTime",0);
 
@@ -73,10 +78,15 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+        int time = intent.getIntExtra("settingTime",0);
+
         if (v.getId() == R.id.real_start_button) {
+            // 시간설정
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
+            intent.putExtra("settingTime",time);
             startActivity(intent);
+
+
         }else if(v.getId() == R.id.reset_button){
             intent = new Intent(getApplicationContext(), DistsancePage.class);
             startActivity(intent);

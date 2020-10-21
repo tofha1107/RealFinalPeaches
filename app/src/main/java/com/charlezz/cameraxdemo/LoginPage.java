@@ -60,7 +60,7 @@ public class LoginPage extends AppCompatActivity implements View.OnClickListener
             Intent intent = new Intent(getApplicationContext(), JoinPage.class);
             startActivity(intent);
         }else if(v.getId() == R.id.login_button){
-            sendRequest();
+            //sendRequest();
 
             final Handler delayHandler = new Handler();
             delayHandler.postDelayed(new Runnable() {

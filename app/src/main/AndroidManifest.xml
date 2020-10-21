@@ -38,6 +38,9 @@
         <activity android:name=".exerciseCamera">
 
         </activity>
+
+        <activity android:name=".ClosePage"></activity>
+
         <activity android:name=".step4_record">
 
         </activity>

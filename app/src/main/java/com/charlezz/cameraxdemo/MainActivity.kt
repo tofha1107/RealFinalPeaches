@@ -18,6 +18,7 @@ import android.view.TextureView
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
-        findViewById<ImageButton>(R.id.capture_button).setOnClickListener {
+        findViewById<AppCompatButton>(R.id.capture_button).setOnClickListener {
             val file = File(externalMediaDirs.first(),
                 "${System.currentTimeMillis()}.jpg")
             imageCapture.takePicture(file,
@@ -137,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -153,12 +154,12 @@ class MainActivity : AppCompatActivity() {
             updateTransform()
         }
 
-        test.setOnClickListener{
-
-            test2.setText("sadf");
-           val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent);
-        }
+//        test.setOnClickListener{
+//
+//            test2.setText("sadf");
+//            val intent = Intent(this, MainActivity2::class.java)
+//            startActivity(intent);
+//        }
 
     }
 
@@ -242,11 +243,12 @@ class MainActivity : AppCompatActivity() {
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
-                        Response.Listener<String> { response ->
-                            // Display the first 500 characters of the response string.
-                            Log.d("CameraXApp", "Response is: ${response}")
-                        },
-                        Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
+                    Response.Listener<String> { response ->
+                        // Display the first 500 characters of the response string.
+                        println()
+                        Log.d("CameraXApp", "Response is: ${response}")
+                    },
+                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
                     override fun getParams() : Map<String,String> {

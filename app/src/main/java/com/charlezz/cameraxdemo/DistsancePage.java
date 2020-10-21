@@ -10,6 +10,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class DistsancePage extends AppCompatActivity implements View.OnClickListener {
 
     private Button button_choose;
@@ -20,6 +23,8 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private Button button14;
     private int time;
     private Intent intent;
+
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,10 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
+
+            //10분을 밀리초로 환산한 값을 설정할 것.
             time = 10;
+
         }
 
         if (v.getId() == R.id.button12) {

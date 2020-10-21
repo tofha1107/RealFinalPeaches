@@ -28,6 +28,9 @@ public class ClosePage extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.close_page);
 
+        audioRecord audioActivity = new audioRecord();
+        audioActivity.startPlay();
+
         real_finish_button = (Button)findViewById(R.id.real_finish_button);
         real_finish_button.setOnClickListener(this);
 
