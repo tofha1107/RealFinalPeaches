@@ -117,11 +117,12 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         recorder.release();
         recorder = null;
 
+        //녹음 저장하는 과정
         ContentValues values = new ContentValues(10);
 
         values.put(MediaStore.MediaColumns.TITLE, "Recorded");
         values.put(MediaStore.Audio.Media.ALBUM, "Audio Album");
-        values.put(MediaStore.Audio.Media.ARTIST, "Mike");
+        values.put(MediaStore.Audio.Media.ARTIST, "Parents");
         values.put(MediaStore.Audio.Media.DISPLAY_NAME, "Recorded Audio");
         values.put(MediaStore.Audio.Media.IS_RINGTONE, 1);
         values.put(MediaStore.Audio.Media.IS_MUSIC, 1);

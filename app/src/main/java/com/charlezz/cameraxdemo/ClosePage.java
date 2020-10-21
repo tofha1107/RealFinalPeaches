@@ -22,6 +22,7 @@ public class ClosePage extends AppCompatActivity implements View.OnClickListener
     private AlarmManager alarm_manager;
     private int hour, minute;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

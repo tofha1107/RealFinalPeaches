@@ -18,7 +18,8 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private Button button12;
     private Button button13;
     private Button button14;
-
+    private int time;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +40,16 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
 
         button14 = (Button)findViewById(R.id.button14);
         button14.setOnClickListener(this);
+
+        intent = getIntent();
+
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_choose) {
-            Intent intent = new Intent(getApplicationContext(), EyePage.class);
+            intent = new Intent(getApplicationContext(), EyePage.class);
+            intent.putExtra("settingTime", time);
             startActivity(intent);
         }
 
@@ -54,7 +59,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
-
+            time = 10;
         }
 
         if (v.getId() == R.id.button12) {
@@ -63,6 +68,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
+            time = 20;
         }
 
         if (v.getId() == R.id.button13) {
@@ -71,6 +77,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            time = 60;
         }
 
         if (v.getId() == R.id.button14) {
@@ -79,6 +86,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
+            time = 30;
         }
     }
 

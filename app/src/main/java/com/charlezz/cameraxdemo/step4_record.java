@@ -7,9 +7,11 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,13 +30,23 @@ public class step4_record extends AppCompatActivity {
     String filename;
     public static final int PERMISSION_ALL = 0;
 
-    private final static String TAG = "alterFunc";
+    private final static String TAG = "step4_record";
     private final static int REQUESTCODE_RINGTONE_PICKER = 1000;
+
+    private int settingTime;
+    private int moveTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step4_record);
+
+        final Intent intent = getIntent();
+        settingTime = intent.getIntExtra("settingTime",0);
+        moveTime = intent.getIntExtra("moveTime",0);
+
+//        Log.v("myValueTest", settingTime+"/"+moveTime);
+
 
         text = findViewById(R.id.textView);
 
@@ -61,7 +73,10 @@ public class step4_record extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(step4_record.this, ExecBeforePageActivity.class));
+                Intent finishIntent = new Intent(step4_record.this, ExecBeforePageActivity.class);
+                intent.putExtra("settingTime",settingTime);
+                intent.putExtra("moveTime", moveTime);
+                startActivity(finishIntent);
             }
         });
 
@@ -87,7 +102,7 @@ public class step4_record extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if( requestCode == REQUESTCODE_RINGTONE_PICKER ) {
+        if(requestCode == REQUESTCODE_RINGTONE_PICKER) {
             if (resultCode == RESULT_OK) {
                 // -- 알림음 재생하는 코드 --
                 Uri ring = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
