@@ -38,6 +38,7 @@ private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var viewFinder: TextureView
 
     init {

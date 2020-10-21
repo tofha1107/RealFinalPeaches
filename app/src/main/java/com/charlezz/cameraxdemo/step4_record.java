@@ -14,13 +14,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class step4_record extends AppCompatActivity {
+public class step4_record extends AppCompatActivity implements View.OnClickListener {
 
     AlertDialog alertDialog;
     Ringtone rt;
     RingtoneManager rtm;
     private Button record_btnn;
     private Button basic_btn;
+    private Button set_finish_button;
     private TextView m_tvRingtoneUri;
     private String m_strRingToneUri;
     private TextView text;
@@ -37,6 +38,7 @@ public class step4_record extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step4_record);
 
+
         text = findViewById(R.id.textView);
 
         basic_btn = findViewById(R.id.basic_btn);
@@ -51,6 +53,8 @@ public class step4_record extends AppCompatActivity {
 
 
 
+
+
         record_btnn = findViewById(R.id.record_btn);
         record_btnn.setOnClickListener(new View.OnClickListener() {
 
@@ -60,17 +64,15 @@ public class step4_record extends AppCompatActivity {
             }
         });
 
-        Button finish_button = findViewById(R.id.set_finish_button);
-        finish_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(step4_record.this, ExecBeforePageActivity.class));
-            }
-        });
+       }
 
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.set_finish_button) {
+            Intent intent = new Intent(getApplicationContext(), ExecBeforePageActivity.class);
+            startActivity(intent);
+        }
     }
-
-
 
 
     @Override
