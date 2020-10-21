@@ -20,6 +20,7 @@ public class CameraPage extends AppCompatActivity implements View.OnClickListene
         face_button = (Button)findViewById(R.id.face_button);
 
         face_button.setOnClickListener(this);
+
     }
 
     @Override
