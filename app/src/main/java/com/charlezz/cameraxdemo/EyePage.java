@@ -20,6 +20,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
     private int settingTime;
     private int moveTime;
+    int time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,11 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
         time60 = (Button)findViewById(R.id.time60);
         time60.setOnClickListener(this);
+
         intent = getIntent();
-         settingTime = intent.getIntExtra("settingTime",0);
+        settingTime = intent.getExtras().getInt("settingTime");
+        moveTime = intent.getExtras().getInt("moveTime");
+
 //        Log.v("settingTime",settingTime+",");
 //        Toast.makeText(this,"설정한 시간 " + settingTime,Toast.LENGTH_SHORT).show()
 
@@ -50,10 +54,16 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_choose2) {
-            Intent intent = new Intent(getApplicationContext(), step4_record.class);
+
+            intent = new Intent(getApplicationContext(), step4_record.class);
             intent.putExtra("settingTime",settingTime);
             intent.putExtra("moveTime",moveTime);
             startActivity(intent);
+
+//            Intent intent = getIntent();
+//            String name = intent.getExtras().getString("name");
+//            int age = intent.getExtras().getInt("age");
+
         }
 
         if (v.getId() == R.id.time5) {

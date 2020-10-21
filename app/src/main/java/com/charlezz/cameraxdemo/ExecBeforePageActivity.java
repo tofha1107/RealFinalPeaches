@@ -34,6 +34,9 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     private Button go_eye;
     private Timer timer;
     Intent intent;
+    int time;
+    int settingTime;
+    int moveTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +46,14 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         intent = getIntent();
 
        // Log.v("timetimetime",time+"ㅠㅠ");
-        int time2 = intent.getIntExtra("moveTime",0);
-
-
-
-
+        moveTime = intent.getExtras().getInt("moveTime");
+        settingTime= intent.getExtras().getInt("settingTime");
 
         real_start_button = (Button) findViewById(R.id.real_start_button);
         button6 = (Button) findViewById(R.id.button6);
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
-        button6.setText(String.valueOf(time2));
+        button6.setText(String.valueOf(settingTime));
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
         mTextView.setText(getTime());
@@ -78,12 +78,22 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        int time = intent.getIntExtra("settingTime",0);
+
+//
+//        String name = intent.getExtras().getString("name");
+//        int age = intent.getExtras().getInt("age");
+
+
+
+        //int time = intent.getIntExtra("settingTime",0);
 
         if (v.getId() == R.id.real_start_button) {
             // 시간설정
+
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
-            intent.putExtra("settingTime",time);
+            intent.putExtra("settingTime", settingTime);
+            intent.putExtra("moveTime", moveTime);
+
             startActivity(intent);
 
 

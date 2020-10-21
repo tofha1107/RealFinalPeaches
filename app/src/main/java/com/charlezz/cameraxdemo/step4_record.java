@@ -35,15 +35,23 @@ public class step4_record extends AppCompatActivity {
 
     private int settingTime;
     private int moveTime;
+    int time;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step4_record);
 
-        final Intent intent = getIntent();
-        settingTime = intent.getIntExtra("settingTime",0);
-        moveTime = intent.getIntExtra("moveTime",0);
+//        Intent intent = getIntent();
+//        String name = intent.getExtras().getString("name");
+//        int age = intent.getExtras().getInt("age");
+
+
+        intent = getIntent();
+        settingTime = intent.getExtras().getInt("settingTime");
+        moveTime = intent.getExtras().getInt("moveTime");
+
 
 //        Log.v("myValueTest", settingTime+"/"+moveTime);
 
@@ -73,10 +81,11 @@ public class step4_record extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent finishIntent = new Intent(step4_record.this, ExecBeforePageActivity.class);
+
+                intent = new Intent(step4_record.this, ExecBeforePageActivity.class);
                 intent.putExtra("settingTime",settingTime);
                 intent.putExtra("moveTime", moveTime);
-                startActivity(finishIntent);
+                startActivity(intent);
             }
         });
 

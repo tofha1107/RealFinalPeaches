@@ -26,21 +26,25 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     private TextView using_time_view ;
     private CountDownTimer countDownTimer;
     private Timer timer;
+    Intent intent;
+    int time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
 
-        Intent intent = getIntent();
+        //DistsancePage distsancePage = new DistsancePage();
+
+        intent = getIntent();
 
         // 시간설정값
-        int time = intent.getIntExtra("settingTime",0);
+        time = intent.getExtras().getInt("settingTime");
 
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(),ClosePage.class);
+                intent = new Intent(getApplicationContext(),ClosePage.class);
                 startActivity(intent);
             }
         };
