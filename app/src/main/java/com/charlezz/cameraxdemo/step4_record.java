@@ -19,8 +19,7 @@ public class step4_record extends AppCompatActivity {
     AlertDialog alertDialog;
     Ringtone rt;
     RingtoneManager rtm;
-    private Button record_btnn;
-    private Button basic_btn;
+    private Button record_btn, basic_btn, set_finish_button;
     private TextView m_tvRingtoneUri;
     private String m_strRingToneUri;
     private TextView text;
@@ -44,15 +43,12 @@ public class step4_record extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showRingtonChooser();
-                //text.setText("sadfsdafsda");
             }
 
         });
 
-
-
-        record_btnn = findViewById(R.id.record_btn);
-        record_btnn.setOnClickListener(new View.OnClickListener() {
+        record_btn = findViewById(R.id.record_btn);
+        record_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -60,18 +56,17 @@ public class step4_record extends AppCompatActivity {
             }
         });
 
-        Button finish_button = findViewById(R.id.set_finish_button);
-        finish_button.setOnClickListener(new View.OnClickListener() {
+        set_finish_button = findViewById(R.id.set_finish_button);
+        set_finish_button.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 startActivity(new Intent(step4_record.this, ExecBeforePageActivity.class));
             }
         });
 
+
     }
-
-
-
 
     @Override
     public void onBackPressed()
@@ -85,11 +80,6 @@ public class step4_record extends AppCompatActivity {
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
 
-
-        //-- 알림 선택창이 떴을 때, 기본값으로 선택되어질 ringtone설정
-//        if( m_strRingToneUri != null && m_strRingToneUri.isEmpty() ) {
-//            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse( m_strRingToneUri ));
-//        }
         this.startActivityForResult( intent, REQUESTCODE_RINGTONE_PICKER );
     }
 
@@ -101,8 +91,8 @@ public class step4_record extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // -- 알림음 재생하는 코드 --
                 Uri ring = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                if (ring != null) {m_strRingToneUri = ring.toString();
-                    m_tvRingtoneUri.setText(ring.toString());
+                if (ring != null) {
+
                     //this.startRingtone(ring);
                 } else {m_strRingToneUri = null;
                     m_tvRingtoneUri.setText( "Choose ringtone" );
@@ -110,6 +100,8 @@ public class step4_record extends AppCompatActivity {
             }
         }
     }
+
+
 
 
 
