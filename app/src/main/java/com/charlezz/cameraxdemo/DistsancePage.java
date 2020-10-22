@@ -20,7 +20,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private Button button12;
     private Button button13;
     private Button button14;
-    private int time;
+    private int settingTime;
     private Intent intent;
 
     private Timer timer;
@@ -60,41 +60,43 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
 
             //10분을 밀리초로 환산한 값을 설정할 것.
-            time = 1000*30; //30초
+            settingTime = 1000*30; //30초
         }
 
-        if (v.getId() == R.id.button_choose) {
-            intent = new Intent(getApplicationContext(), EyePage.class);
-            intent.putExtra("settingTime", time);
-            startActivity(intent);
-        }
-
-        else if (v.getId() == R.id.button12) {
+        if (v.getId() == R.id.button12) {
             //btn_choose10.setBackground(Drawable);
             button12.setBackground(this.getResources().getDrawable(R.drawable.dark_20));
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
-            time = 20*60*1000;
+            settingTime = 20*60*1000;
         }
 
-        else if (v.getId() == R.id.button13) {
-            //btn_choose10.setBackground(Drawable);
-            button13.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
-            btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
-            button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
-            button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            time = 60*60*1000;
-        }
-
-        else if (v.getId() == R.id.button14) {
+        if (v.getId() == R.id.button14) {
             //btn_choose10.setBackground(Drawable);
             button14.setBackground(this.getResources().getDrawable(R.drawable.dark_30));
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
-            time = 30*60*1000;
+            settingTime = 30*60*1000;
         }
+
+        if (v.getId() == R.id.button13) {
+            //btn_choose10.setBackground(Drawable);
+            button13.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
+            btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
+            button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
+            button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            settingTime = 60*60*1000;
+        }
+
+        if (v.getId() == R.id.button_choose) {
+            intent = new Intent(getApplicationContext(), EyePage.class);
+            intent.putExtra("settingTime", settingTime);
+            startActivity(intent);
+        }
+
+
 
 
     }

@@ -58,8 +58,8 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         if (v.getId() == R.id.button_choose2) {
 
             intent = new Intent(getApplicationContext(), step4_record.class);
-            intent.putExtra("settingTime",settingTime);
-            intent.putExtra("moveTime",moveTime);
+            intent.putExtra("settingTime", settingTime);
+            intent.putExtra("moveTime", moveTime);
             startActivity(intent);
 
 //            Intent intent = getIntent();
