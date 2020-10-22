@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,15 +19,15 @@ import java.util.TimerTask;
 public class ExecutionPage extends AppCompatActivity implements View.OnClickListener {
 
     //MILLISINFUTURE과 COUNT 함께 설정
-
-    private static final int MILLISINFUTURE = 10*1000;
+    private static int MILLISINFUTURE = 10*1000;
+    private static int bun;
+    private static int cho;
     private static final int COUNT_DOWN_INTERVAL = 1000;
     private int count = 10;
     private Button end_imd_button;
     private TextView using_time_view ;
     private CountDownTimer countDownTimer;
-    private Timer timer;
-    private Timer timer2;
+    private Timer timer, timer2, timer3;
     Intent intent;
     int time;
     int moveTime;
@@ -57,34 +58,49 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
             }
         };
-        timer = new Timer();
-        timer.schedule(timerTask, time);
 
+        TimerTask timerTask3 = new TimerTask() {
+            @Override
+            public void run() {
+                Toast.makeText(ExecutionPage.this, "로그인실패 문구", Toast.LENGTH_LONG).show();
+            }
+        };
+
+
+        timer = new Timer();
         timer2 = new Timer();
-        timer2.schedule(timerTask2, moveTime);
+        timer3 = new Timer();
+
+        timer.schedule(timerTask, time);
+        if(moveTime == 0){
+
+
+        }else {
+            timer2.schedule(timerTask2, moveTime);
+        }
 
 //        timer2 = new Timer();
 //        timer.schedule(timerTask, moveTime);
         Log.v("타이머","실행");
+
+        // 카운트 다운 숫자랑 시간 설정하기 -> 보여지는 숫자 : count / 실제 시간 : MILLISINFUTURE / time 나누기 1000 = 초
+
+        MILLISINFUTURE = time;
+        count = time;
+        bun = (MILLISINFUTURE / (60*1000));
+        cho = (MILLISINFUTURE % (60 * 1000)) / 1000;
+
 
         using_time_view = (TextView)findViewById(R.id.using_time_view);
         countDownTimer();
         countDownTimer.start();
 
 
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                Intent intent = new Intent(ExecutionPage.this, ClosePage.class);
-//                startActivity(intent);
-//            }
-//        }, 10*1000);
-
         end_imd_button = (Button)findViewById(R.id.end_imd_button);
         end_imd_button.setOnClickListener(this);
 
     }
+
 
     public void onClick(View v) {
         if (v.getId() == R.id.end_imd_button) {
@@ -97,11 +113,15 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
         countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
-                using_time_view.setText(String.valueOf(count));
-                count --;
+                using_time_view.setText(bun+"분"+cho+"초");
+
+                 if (cho == 0){
+                 cho = 60;
+                 bun--;}
+                cho--;
             }
             public void onFinish() {
-                using_time_view.setText(String.valueOf("시간 끝~~!!"));
+                using_time_view.setText(String.valueOf("시간이 끝났어요!"));
             }
         };
     }

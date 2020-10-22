@@ -75,7 +75,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
-            time = 20;
+            time = 20*60*1000;
         }
 
         else if (v.getId() == R.id.button13) {
@@ -84,7 +84,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            time = 60;
+            time = 60*60*1000;
         }
 
         else if (v.getId() == R.id.button14) {
@@ -93,7 +93,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button12.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             btn_choose10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             button13.setBackground(this.getResources().getDrawable(R.drawable.light_60));
-            time = 30;
+            time = 30*60*1000;
         }
 
 

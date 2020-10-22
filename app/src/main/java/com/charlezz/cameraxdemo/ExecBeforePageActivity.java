@@ -57,7 +57,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
 
-        real_settingTime = settingTime/60000;
+        real_settingTime = settingTime/(60*1000);
 
         button6.setText(String.valueOf(real_settingTime + "분"));
 
