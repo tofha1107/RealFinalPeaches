@@ -12,7 +12,9 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,15 +31,18 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("kk:mm");
-    TextView mTextView;
+    TextView mTextView, endTextView;
 
     private Button go_eye;
     private Timer timer;
     Intent intent;
-    int time;
-    int settingTime;
-    int moveTime;
-    int real_settingTime;
+
+    int settingTime; // 사용시간
+    int moveTime; // 눈운동 주기
+    int real_settingTime; // 눈 운동 주기 분으로 바꾼거
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +51,16 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         intent = getIntent();
 
-       // Log.v("timetimetime",time+"ㅠㅠ");
+        //Log.v("timetimetime",time+"ㅠㅠ");
         moveTime = intent.getExtras().getInt("moveTime");
         settingTime= intent.getExtras().getInt("settingTime");
+
+        long reservationTime = System.currentTimeMillis() + settingTime ;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("kk:mm");
+        String curTime = dateFormat.format(new Date(reservationTime));
+
+
+        Log.v("timetimetime",settingTime+"ㅠㅠ");
 
 
 
@@ -57,17 +69,25 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
 
-        real_settingTime = settingTime/60000;
+        real_settingTime = moveTime/(60*1000);
 
-        button6.setText(String.valueOf(real_settingTime + "분"));
+        if(real_settingTime == 0){
+            button6.setText(String.valueOf("패쓰"));
+        }else{
+            button6.setText(String.valueOf(real_settingTime + "분 후"));
+        }
+
+
 
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
+        endTextView = (TextView) findViewById(R.id.end_time);
+
         mTextView.setText(getTime());
+        endTextView.setText(curTime);
 
 
         TextView end_time = findViewById(R.id.end_time);
-
 
 
         real_start_button.setOnClickListener(this);
@@ -83,16 +103,13 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         return mFormat.format(mDate);
     }
 
+
     @Override
     public void onClick(View v) {
 
-//
-//        String name = intent.getExtras().getString("name");
-//        int age = intent.getExtras().getInt("age");
-
-
-
-        //int time = intent.getIntExtra("settingTime",0);
+//      String name = intent.getExtras().getString("name");
+//      int age = intent.getExtras().getInt("age");
+//      int time = intent.getIntExtra("settingTime",0);
 
         if (v.getId() == R.id.real_start_button) {
             // 시간설정

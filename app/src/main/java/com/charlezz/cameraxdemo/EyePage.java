@@ -44,7 +44,9 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
         intent = getIntent();
         settingTime = intent.getExtras().getInt("settingTime");
-        moveTime = intent.getExtras().getInt("moveTime");
+        moveTime = 0;
+
+        //moveTime = intent.getExtras().getInt("moveTime");
 
 //        Log.v("settingTime",settingTime+",");
 //        Toast.makeText(this,"설정한 시간 " + settingTime,Toast.LENGTH_SHORT).show()
@@ -56,8 +58,8 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         if (v.getId() == R.id.button_choose2) {
 
             intent = new Intent(getApplicationContext(), step4_record.class);
-            intent.putExtra("settingTime",settingTime);
-            intent.putExtra("moveTime",moveTime);
+            intent.putExtra("settingTime", settingTime);
+            intent.putExtra("moveTime", moveTime);
             startActivity(intent);
 
 //            Intent intent = getIntent();
@@ -72,7 +74,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 5000;
+            moveTime = 5*1000;
         }
 
         if (v.getId() == R.id.time10) {
@@ -81,7 +83,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 10;
+            moveTime = 10*60*1000;
         }
 
         if (v.getId() == R.id.time60) {
@@ -90,7 +92,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
-            moveTime = 60;
+            moveTime = 60*60*1000;
         }
 
         if (v.getId() == R.id.time20) {
@@ -99,7 +101,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
-            moveTime = 20;
+            moveTime = 20*60*1000;
         }
     }
 
