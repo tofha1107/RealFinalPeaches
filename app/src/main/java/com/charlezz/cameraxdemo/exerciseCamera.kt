@@ -36,6 +36,7 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+var blink_cnt = 0;
 
 class exerciseCamera : AppCompatActivity() {
 
@@ -144,15 +145,6 @@ class exerciseCamera : AppCompatActivity() {
         setContentView(R.layout.exercise_camera)
         viewFinder = findViewById(R.id.view_finder)
 
-//        next_btn.setOnClickListener {
-//            startActivity(Intent(this, exerciseCamera::class.java))
-//
-//        }
-        finish_btn.setOnClickListener {
-            val intent3 = Intent(this, ExecutionPage::class.java)
-            startActivity(intent3)
-        }
-
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
         } else {
@@ -254,11 +246,23 @@ class exerciseCamera : AppCompatActivity() {
                                 val gaze_state = obj.getString("gaze_state")
                                 val left_pupil = obj.getString("left_pupil")
                                 val right_pupil = obj.getString("right_pupil")
-                                Log.d("CameraXApp","겟스트링 완료")
-                                Log.d("CameraXApp","gaze_state: $gaze_state")
-                                Log.d("CameraXApp","left_pupil: $left_pupil")
-                                Log.d("CameraXApp","right_pupil: $right_pupil")
-                                Log.d("CameraXApp","json출력완료")
+//                                Log.d("CameraXApp","겟스트링 완료")
+//                                Log.d("CameraXApp","gaze_state: $gaze_state")
+//                                Log.d("CameraXApp","left_pupil: $left_pupil")
+//                                Log.d("CameraXApp","right_pupil: $right_pupil")
+                                  Log.d("CameraXApp","json출력완료")
+
+                                if (gaze_state.equals("Blinking")){
+                                    blink_cnt += 1;
+                                }
+
+                                Log.d("CameraXApp","" + blink_cnt);
+
+                                if (blink_cnt>=5){
+                                    var nextIntent = Intent(exerciseCamera.context(), ExecutionPage::class.java)
+                                    ContextCompat.startActivity(context(), nextIntent, null)
+
+                                }
 
                             } catch (e: JSONException) {
                                 e.printStackTrace()

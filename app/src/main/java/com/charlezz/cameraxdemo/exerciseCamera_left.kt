@@ -37,6 +37,7 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+var left_cnt = 0;
 
 class exerciseCamera_left : AppCompatActivity() {
 
@@ -60,6 +61,7 @@ class exerciseCamera_left : AppCompatActivity() {
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(1280, 720))
             setLensFacing(CameraX.LensFacing.FRONT)
+            //setTargetRotation(Surface.ROTATION_270);
 
         }.build()
 
@@ -77,6 +79,7 @@ class exerciseCamera_left : AppCompatActivity() {
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
                 setLensFacing(CameraX.LensFacing.FRONT)
+                //setTargetRotation(Surface.ROTATION_270);
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
@@ -109,16 +112,19 @@ class exerciseCamera_left : AppCompatActivity() {
         //이미지 프로세싱 설정 시작
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
             setLensFacing(CameraX.LensFacing.FRONT)
+            //setTargetRotation(Surface.ROTATION_270);
             // 이미지 분석을 위한 쓰레드를 하나 생성합니다.
             val analyzerThread = HandlerThread("LuminosityAnalysis").apply { start() }
             setCallbackHandler(Handler(analyzerThread.looper))
             // 하나도 빠짐없이 프레임 전부를 분석하기보다는 매순간 가장 최근 프레임만을 가져와 분석하도록 합니다
             setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+
         }.build()
 
         // 커스텀 이미지 프로세싱 객체 생성
         val analyzerUseCase = ImageAnalysis(analyzerConfig).apply {
             analyzer = LuminosityAnalyzer()
+
         }
         //이미지 프로세싱 설정 끝
 
@@ -155,17 +161,16 @@ class exerciseCamera_left : AppCompatActivity() {
 //        val nextIntent = Intent(this, exerciseCamera::class.java)
 //        startActivity(nextIntent)
 
-        next_btn1.setOnClickListener {
-            val nextIntent = Intent(this, exerciseCamera::class.java)
-            startActivity(nextIntent)
-        }
+//        next_btn1.setOnClickListener {
+//            val nextIntent = Intent(this, exerciseCamera::class.java)
+//            startActivity(nextIntent)
+//        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
-
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
@@ -262,7 +267,7 @@ class exerciseCamera_left : AppCompatActivity() {
 
                         try {
                             val obj = JSONObject(response)
-                            var gaze_state = obj.getString("gaze_state")
+                            val gaze_state = obj.getString("gaze_state")
                             val left_pupil = obj.getString("left_pupil")
                             val right_pupil = obj.getString("right_pupil")
 
@@ -272,12 +277,17 @@ class exerciseCamera_left : AppCompatActivity() {
                             Log.d("CameraXApp", "right_pupil: $right_pupil")
                             Log.d("CameraXApp", "json출력완료")
 
-//                            if (gaze_state.equals("Looking center")){
-//
-//                                var nextIntent = Intent(this, exerciseCamera::class.java)
-//                                startActivity(nextIntent)
-//
-//                            }
+                            if (gaze_state.equals("Looking left")){
+                                left_cnt += 1;
+                            }
+
+                            Log.d("CameraXApp","" + left_cnt);
+
+                            if (left_cnt>=5){
+                                 var nextIntent = Intent(exerciseCamera_left.context(), exerciseCamera::class.java)
+                                 startActivity(exerciseCamera.context(),nextIntent,null)
+
+                            }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()

@@ -36,6 +36,7 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+var right_cnt = 0;
 
 class exerciseCamera_right : AppCompatActivity() {
 
@@ -155,10 +156,10 @@ class exerciseCamera_right : AppCompatActivity() {
 //        val nextIntent = Intent(this, exerciseCamera::class.java)
 //        startActivity(nextIntent)
 
-        next_btn2.setOnClickListener {
-            val intent2 = Intent(this, exerciseCamera::class.java)
-            startActivity(intent2)
-        }
+//        next_btn2.setOnClickListener {
+//            val intent2 = Intent(this, exerciseCamera::class.java)
+//            startActivity(intent2)
+//        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -271,6 +272,22 @@ class exerciseCamera_right : AppCompatActivity() {
                             Log.d("CameraXApp", "left_pupil: $left_pupil")
                             Log.d("CameraXApp", "right_pupil: $right_pupil")
                             Log.d("CameraXApp", "json출력완료")
+
+                            if (gaze_state.equals("Looking right")){
+                                right_cnt += 1;
+                            }
+
+                            Log.d("CameraXApp","" + right_cnt);
+
+                            if (right_cnt>=5){
+                                var nextIntent = Intent(exerciseCamera_right.context(), exerciseCamera::class.java)
+                                ContextCompat.startActivity(
+                                    exerciseCamera.context(),
+                                    nextIntent,
+                                    null
+                                )
+
+                            }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()

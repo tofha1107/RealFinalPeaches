@@ -23,6 +23,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.exifinterface.media.ExifInterface
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -33,6 +34,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
 import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
@@ -60,12 +62,12 @@ class MainActivity : AppCompatActivity() {
         //미리보기 설정 시작
         val previewConfig = PreviewConfig.Builder().apply {
             setLensFacing(CameraX.LensFacing.FRONT)
+
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(640, 640))
         }.build()
 
         val preview = Preview(previewConfig)
-
         preview.setOnPreviewOutputUpdateListener {
             viewFinder.surfaceTexture = it.surfaceTexture
             updateTransform()

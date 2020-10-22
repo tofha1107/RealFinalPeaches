@@ -18,10 +18,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".CameraPage"></activity>
         <activity android:name=".DistsancePage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ExecBeforePageActivity">
 
