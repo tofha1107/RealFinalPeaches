@@ -46,7 +46,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         intent = getIntent();
 
-       // Log.v("timetimetime",time+"ㅠㅠ");
+        Log.v("timetimetime",time+"ㅠㅠ");
         moveTime = intent.getExtras().getInt("moveTime");
         settingTime= intent.getExtras().getInt("settingTime");
 
@@ -57,9 +57,14 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
 
-        real_settingTime = settingTime/(60*1000);
+        real_settingTime = moveTime/(60*1000);
+        if(real_settingTime == 0){
+            button6.setText(String.valueOf("패쓰"));
+        }else{
+            button6.setText(String.valueOf(real_settingTime + "분 후"));
+        }
 
-        button6.setText(String.valueOf(real_settingTime + "분"));
+
 
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
@@ -67,7 +72,6 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
 
         TextView end_time = findViewById(R.id.end_time);
-
 
 
         real_start_button.setOnClickListener(this);
@@ -89,7 +93,6 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 //
 //        String name = intent.getExtras().getString("name");
 //        int age = intent.getExtras().getInt("age");
-
 
 
         //int time = intent.getIntExtra("settingTime",0);
