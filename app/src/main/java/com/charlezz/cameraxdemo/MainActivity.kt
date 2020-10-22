@@ -17,6 +17,7 @@ import android.view.Surface
 import android.view.TextureView
 import android.widget.ImageButton
 import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.*
@@ -28,6 +29,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.OutputStream
@@ -37,9 +40,8 @@ import java.util.concurrent.TimeUnit
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
+
 class MainActivity : AppCompatActivity() {
-
-
     private lateinit var viewFinder: TextureView
 
     init {
@@ -141,11 +143,14 @@ class MainActivity : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
+    var xmlTextView : TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewFinder = findViewById(R.id.view_finder)
+        xmlTextView = findViewById(R.id.distance)
+
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -242,14 +247,24 @@ class MainActivity : AppCompatActivity() {
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.13:9000/re"
+                val url = "http://172.30.1.22:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
                     Response.Listener<String> { response ->
-                        // Display the first 500 characters of the response string.
-                        println()
-                        Log.d("CameraXApp", "Response is: ${response}")
+                        // Display the first 500 characters of the response string
+                        val jsonStr = "{\"s\":0}"
+
+                        try {
+                            val obj = JSONObject(response)
+                            Log.d("CameraXApp",obj.getString("dist"))
+                            Log.d("CameraXApp","json출력완료")
+                            MainActivity.instance?.xmlTextView?.setText(obj.getString("dist"))
+//                            Log.d("CameraXApp","텍스트뷰출력완료")
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                            Log.d("CameraXApp", "Response is: ${response}")
                     },
                     Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
