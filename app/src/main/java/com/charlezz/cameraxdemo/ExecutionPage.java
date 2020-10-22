@@ -50,17 +50,18 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        TimerTask timerTask1 = new TimerTask() {
+        TimerTask timerTask2 = new TimerTask() {
             @Override
-            public void run() {
-                intent = new Intent(getApplicationContext(),exerciseCamera.class);
+            public void run() { // TimerTask 2개 실행
+                intent = new Intent(getApplicationContext(),exerciseCamera_left.class);
                 startActivity(intent);
             }
         };
-
-
         timer = new Timer();
         timer.schedule(timerTask, time);
+
+        timer2 = new Timer();
+        timer2.schedule(timerTask2, moveTime);
 
 //        timer2 = new Timer();
 //        timer.schedule(timerTask, moveTime);
