@@ -24,7 +24,7 @@
 
     <Button
         android:id="@+id/capture_button"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="67dp"
         android:background="@color/colorTitlePink"
         android:fontFamily="@font/tmoneyroundwindextrabold"
@@ -40,8 +40,8 @@
 
     <TextureView
         android:id="@+id/view_finder"
-        android:layout_width="279dp"
-        android:layout_height="280dp"
+        android:layout_width="0dp"
+        android:layout_height="328dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -49,42 +49,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.498" />
 
-    <Button
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="160dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/test2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="170dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="170dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/test" />
-
     <ImageView
         android:id="@+id/imageView15"
         android:layout_width="115dp"
         android:layout_height="113dp"
         app:layout_constraintBottom_toBottomOf="@+id/capture_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
+        app:layout_constraintVertical_bias="0.078"
         app:srcCompat="@drawable/smile_peach" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

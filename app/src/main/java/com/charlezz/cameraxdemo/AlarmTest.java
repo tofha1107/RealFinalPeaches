@@ -45,8 +45,10 @@ public class AlarmTest extends AppCompatActivity {
         PendingIntent pIntent = PendingIntent.getBroadcast(this,0,intent,0);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            hour = time_picker.getHour();
-            minute = time_picker.getMinute();
+//            hour = time_picker.getHour();
+//            minute = time_picker.getMinute();
+
+            getFilesDir();
         }
 
         Calendar calendar = Calendar.getInstance();

@@ -21,12 +21,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.exercise_camera.*
+import kotlinx.android.synthetic.main.exercise_camera_left.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -35,17 +36,19 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+private var left_cnt = 0;
 
-class exerciseCamera : AppCompatActivity() {
+class exerciseCamera_left : AppCompatActivity() {
 
     private lateinit var viewFinder: TextureView
+    val gaze_state = null;
 
     init {
         instance = this
     }
 
     companion object {
-        private var instance: exerciseCamera? = null
+        private var instance: exerciseCamera_left? = null
 
         fun context() : Context {
             return instance!!.applicationContext
@@ -140,8 +143,16 @@ class exerciseCamera : AppCompatActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exercise_camera)
+        setContentView(R.layout.exercise_camera_left)
+
+
+
         viewFinder = findViewById(R.id.view_finder)
+
+        next_button.setOnClickListener({
+            val intent = Intent(this, exerciseCamera_right::class.java)
+            startActivity(intent)
+        })
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -152,6 +163,7 @@ class exerciseCamera : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
+
 
     }
 
@@ -230,7 +242,7 @@ class exerciseCamera : AppCompatActivity() {
                 var b:ByteArray = out.toByteArray()
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
-                val queue = Volley.newRequestQueue(exerciseCamera.context())
+                val queue = Volley.newRequestQueue(exerciseCamera_left.context())
                 val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
@@ -250,6 +262,17 @@ class exerciseCamera : AppCompatActivity() {
                                 Log.d("CameraXApp","right_pupil: $right_pupil")
                                 Log.d("CameraXApp","json출력완료")
 
+
+
+                                if (gaze_state.equals("Looking left"))
+                                    left_cnt += 1;
+
+//                                    if (left_cnt==5){
+//                                        next_nutton.setOnClickListener({
+//                                            val intent = Intent(this, ExecutionPage::class.java)
+//                                            startActivity(intent)
+//                                        })
+//                                    }
                             } catch (e: JSONException) {
                                 e.printStackTrace()
                             }

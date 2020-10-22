@@ -4,12 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ExecBeforePageActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,16 +32,23 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     TextView mTextView;
 
     private Button go_eye;
-
+    private Timer timer;
+    Intent intent;
+    int time;
+    int settingTime;
+    int moveTime;
+    int real_settingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exec_before_page);
 
-        Intent intent = getIntent();
-        int time = intent.getExtras().getInt("time");
-        int time2 = intent.getExtras().getInt("time2");
+        intent = getIntent();
+
+       // Log.v("timetimetime",time+"ㅠㅠ");
+        moveTime = intent.getExtras().getInt("moveTime");
+        settingTime= intent.getExtras().getInt("settingTime");
 
 
 
@@ -43,7 +56,11 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         button6 = (Button) findViewById(R.id.button6);
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
-        button6.setText(String.valueOf(time2));
+
+        real_settingTime = settingTime/60000;
+
+        button6.setText(String.valueOf(real_settingTime + "분"));
+
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
         mTextView.setText(getTime());
@@ -68,10 +85,25 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
-        Intent intent = null;
+
+//
+//        String name = intent.getExtras().getString("name");
+//        int age = intent.getExtras().getInt("age");
+
+
+
+        //int time = intent.getIntExtra("settingTime",0);
+
         if (v.getId() == R.id.real_start_button) {
+            // 시간설정
+
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
+            intent.putExtra("settingTime", settingTime);
+            intent.putExtra("moveTime", moveTime);
+
             startActivity(intent);
+
+
         }else if(v.getId() == R.id.reset_button){
             intent = new Intent(getApplicationContext(), DistsancePage.class);
             startActivity(intent);

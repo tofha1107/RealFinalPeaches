@@ -2,12 +2,14 @@ package com.charlezz.cameraxdemo;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
 
+import java.io.Console;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -29,9 +32,12 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
     MediaRecorder recorder;
     MediaPlayer player;
 
-    String filename;
+    public static String filename;
 
     public static final int PERMISSION_ALL = 0;
+
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +90,14 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
 
         filename = myDirectory.getAbsolutePath() + File.separator  + "recorded.mp4";
 
+//        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        editor = preferences.edit();
+//
+//        filename = preferences.getString("playAudioName", "empty");
+//        Log.d("ttt", filename);
+
         Log.v("filename", filename);
         AutoPermissions.Companion.loadAllPermissions(this, 101);
-
-
-
     }
 
 
@@ -103,6 +112,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
             recorder.setOutputFile(filename);
             recorder.prepare();
             recorder.start();
+            Log.v("녹음시작",true+"");
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,12 +126,13 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         recorder.stop();
         recorder.release();
         recorder = null;
-
+        Log.v("녹음중지",true+"");
+        //녹음 저장하는 과정
         ContentValues values = new ContentValues(10);
 
         values.put(MediaStore.MediaColumns.TITLE, "Recorded");
         values.put(MediaStore.Audio.Media.ALBUM, "Audio Album");
-        values.put(MediaStore.Audio.Media.ARTIST, "Mike");
+        values.put(MediaStore.Audio.Media.ARTIST, "Parents");
         values.put(MediaStore.Audio.Media.DISPLAY_NAME, "Recorded Audio");
         values.put(MediaStore.Audio.Media.IS_RINGTONE, 1);
         values.put(MediaStore.Audio.Media.IS_MUSIC, 1);
@@ -130,11 +141,18 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         values.put(MediaStore.MediaColumns.MIME_TYPE, "audio/mp4");
         values.put(MediaStore.Audio.Media.DATA, filename);
 
+//        editor.putString("playAudioName", filename);
+//        editor.apply();
+        Log.d("ttt", filename);
+
+
         Uri audioUri = getContentResolver().insert(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, values);
         if (audioUri == null) {
             Log.d("SampleAudioRecorder", "Audio insert failed.");
             return;
         }
+
+
     }
 
     public void startPlay() {

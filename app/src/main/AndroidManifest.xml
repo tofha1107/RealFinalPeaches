@@ -33,14 +33,18 @@
         </activity>
         <activity android:name=".MainActivity2"></activity>
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".exerciseCamera">
 
         </activity>
+        <activity android:name=".exerciseCamera_left">
+
+        </activity>
+        <activity android:name=".exerciseCamera_right"></activity>
+
+        <activity android:name=".ClosePage"></activity>
+
         <activity android:name=".step4_record">
 
         </activity>
@@ -48,11 +52,18 @@
             android:theme="@style/Theme.AppCompat.Light.Dialog"
             />
         <activity android:name=".LoadingPage">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".videoList">
+        </activity>
+
+        <activity android:name=".AlarmTest">
 
         </activity>
+
         <activity android:name=".PlayVideo1"
             android:screenOrientation="landscape"/>
         <activity android:name=".PlayVideo2"

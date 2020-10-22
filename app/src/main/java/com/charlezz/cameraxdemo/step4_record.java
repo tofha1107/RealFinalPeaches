@@ -7,21 +7,21 @@ import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class step4_record extends AppCompatActivity implements View.OnClickListener {
+public class step4_record extends AppCompatActivity {
 
     AlertDialog alertDialog;
     Ringtone rt;
     RingtoneManager rtm;
-    private Button record_btnn;
-    private Button basic_btn;
-    private Button set_finish_button;
+    private Button record_btn, basic_btn, set_finish_button;
     private TextView m_tvRingtoneUri;
     private String m_strRingToneUri;
     private TextView text;
@@ -30,13 +30,30 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
     String filename;
     public static final int PERMISSION_ALL = 0;
 
-    private final static String TAG = "alterFunc";
+    private final static String TAG = "step4_record";
     private final static int REQUESTCODE_RINGTONE_PICKER = 1000;
+
+    private int settingTime;
+    private int moveTime;
+    int time;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step4_record);
+
+//        Intent intent = getIntent();
+//        String name = intent.getExtras().getString("name");
+//        int age = intent.getExtras().getInt("age");
+
+
+        intent = getIntent();
+        settingTime = intent.getExtras().getInt("settingTime");
+        moveTime = intent.getExtras().getInt("moveTime");
+
+
+//        Log.v("myValueTest", settingTime+"/"+moveTime);
 
 
         text = findViewById(R.id.textView);
@@ -46,17 +63,12 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 showRingtonChooser();
-                //text.setText("sadfsdafsda");
             }
 
         });
 
-
-
-
-
-        record_btnn = findViewById(R.id.record_btn);
-        record_btnn.setOnClickListener(new View.OnClickListener() {
+        record_btn = findViewById(R.id.record_btn);
+        record_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -64,16 +76,21 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-       }
+        set_finish_button = findViewById(R.id.set_finish_button);
+        set_finish_button.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(step4_record.this, ExecBeforePageActivity.class);
+                intent.putExtra("settingTime",settingTime);
+                intent.putExtra("moveTime", moveTime);
+                startActivity(intent);
+            }
+        });
 
 
-    public void onClick(View v) {
-        if (v.getId() == R.id.set_finish_button) {
-            Intent intent = new Intent(getApplicationContext(), ExecBeforePageActivity.class);
-            startActivity(intent);
-        }
     }
-
 
     @Override
     public void onBackPressed()
@@ -87,11 +104,6 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true);
         intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL);
 
-
-        //-- 알림 선택창이 떴을 때, 기본값으로 선택되어질 ringtone설정
-//        if( m_strRingToneUri != null && m_strRingToneUri.isEmpty() ) {
-//            intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse( m_strRingToneUri ));
-//        }
         this.startActivityForResult( intent, REQUESTCODE_RINGTONE_PICKER );
     }
 
@@ -99,12 +111,12 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if( requestCode == REQUESTCODE_RINGTONE_PICKER ) {
+        if(requestCode == REQUESTCODE_RINGTONE_PICKER) {
             if (resultCode == RESULT_OK) {
                 // -- 알림음 재생하는 코드 --
                 Uri ring = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-                if (ring != null) {m_strRingToneUri = ring.toString();
-                    m_tvRingtoneUri.setText(ring.toString());
+                if (ring != null) {
+
                     //this.startRingtone(ring);
                 } else {m_strRingToneUri = null;
                     m_tvRingtoneUri.setText( "Choose ringtone" );
@@ -112,6 +124,8 @@ public class step4_record extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+
 
 
 
