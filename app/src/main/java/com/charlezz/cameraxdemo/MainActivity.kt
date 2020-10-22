@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity() {
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.22:9000/re"
+                val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,

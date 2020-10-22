@@ -26,7 +26,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.exercise_camera.*
+import kotlinx.android.synthetic.main.exercise_camera_right.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream

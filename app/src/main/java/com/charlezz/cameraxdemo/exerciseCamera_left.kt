@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -36,12 +35,10 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-private var left_cnt = 0;
 
 class exerciseCamera_left : AppCompatActivity() {
 
     private lateinit var viewFinder: TextureView
-    val gaze_state = null;
 
     init {
         instance = this
@@ -60,6 +57,7 @@ class exerciseCamera_left : AppCompatActivity() {
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(1280, 720))
+            setLensFacing(CameraX.LensFacing.FRONT)
 
         }.build()
 
@@ -76,6 +74,7 @@ class exerciseCamera_left : AppCompatActivity() {
             .apply {
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+                setLensFacing(CameraX.LensFacing.FRONT)
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
@@ -103,6 +102,7 @@ class exerciseCamera_left : AppCompatActivity() {
 
         //이미지 프로세싱 설정 시작
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
+            setLensFacing(CameraX.LensFacing.FRONT)
             // 이미지 분석을 위한 쓰레드를 하나 생성합니다.
             val analyzerThread = HandlerThread("LuminosityAnalysis").apply { start() }
             setCallbackHandler(Handler(analyzerThread.looper))
@@ -140,19 +140,11 @@ class exerciseCamera_left : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercise_camera_left)
-
-
-
         viewFinder = findViewById(R.id.view_finder)
-
-        next_button.setOnClickListener({
-            val intent = Intent(this, exerciseCamera_right::class.java)
-            startActivity(intent)
-        })
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -163,7 +155,6 @@ class exerciseCamera_left : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
-
 
     }
 
@@ -247,38 +238,27 @@ class exerciseCamera_left : AppCompatActivity() {
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
-                        Response.Listener<String> { response ->
-                            // Display the first 500 characters of the response string.
-                            val jsonStr = "{\"s\":0}"
+                    Response.Listener<String> { response ->
+                        // Display the first 500 characters of the response string.
+                        val jsonStr = "{\"s\":0}"
 
-                            try {
-                                val obj = JSONObject(response)
-                                val gaze_state = obj.getString("gaze_state")
-                                val left_pupil = obj.getString("left_pupil")
-                                val right_pupil = obj.getString("right_pupil")
-                                Log.d("CameraXApp","겟스트링 완료")
-                                Log.d("CameraXApp","gaze_state: $gaze_state")
-                                Log.d("CameraXApp","left_pupil: $left_pupil")
-                                Log.d("CameraXApp","right_pupil: $right_pupil")
-                                Log.d("CameraXApp","json출력완료")
+                        try {
+                            val obj = JSONObject(response)
+                            val gaze_state = obj.getString("gaze_state")
+                            val left_pupil = obj.getString("left_pupil")
+                            val right_pupil = obj.getString("right_pupil")
+                            Log.d("CameraXApp","겟스트링 완료")
+                            Log.d("CameraXApp","gaze_state: $gaze_state")
+                            Log.d("CameraXApp","left_pupil: $left_pupil")
+                            Log.d("CameraXApp","right_pupil: $right_pupil")
+                            Log.d("CameraXApp","json출력완료")
 
-
-
-                                if (gaze_state.equals("Looking left"))
-                                    left_cnt += 1;
-
-//                                    if (left_cnt==5){
-//                                        next_nutton.setOnClickListener({
-//                                            val intent = Intent(this, ExecutionPage::class.java)
-//                                            startActivity(intent)
-//                                        })
-//                                    }
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
-                            }
-                            Log.d("CameraXApp", "Response is: ${response}")
-                        },
-                        Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                        Log.d("CameraXApp", "Response is: ${response}")
+                    },
+                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
                     override fun getParams() : Map<String,String> {
