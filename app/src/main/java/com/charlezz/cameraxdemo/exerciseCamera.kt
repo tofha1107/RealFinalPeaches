@@ -27,6 +27,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.exercise_camera.*
+import kotlinx.android.synthetic.main.exercise_camera_left.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -142,6 +143,15 @@ class exerciseCamera : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exercise_camera)
         viewFinder = findViewById(R.id.view_finder)
+
+//        next_btn.setOnClickListener {
+//            startActivity(Intent(this, exerciseCamera::class.java))
+//
+//        }
+        finish_btn.setOnClickListener {
+            val intent3 = Intent(this, ExecutionPage::class.java)
+            startActivity(intent3)
+        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }

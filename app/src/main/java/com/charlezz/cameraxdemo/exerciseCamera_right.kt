@@ -15,6 +15,7 @@ import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
+import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +58,7 @@ class exerciseCamera_right : AppCompatActivity() {
         val previewConfig = PreviewConfig.Builder().apply {
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(1280, 720))
+            setLensFacing(CameraX.LensFacing.FRONT)
 
         }.build()
 
@@ -73,16 +75,21 @@ class exerciseCamera_right : AppCompatActivity() {
             .apply {
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+                setLensFacing(CameraX.LensFacing.FRONT)
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
         findViewById<ImageButton>(R.id.capture_button).setOnClickListener {
-            val file = File(externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg")
+            val file = File(
+                externalMediaDirs.first(),
+                "${System.currentTimeMillis()}.jpg"
+            )
             imageCapture.takePicture(file,
                 object : ImageCapture.OnImageSavedListener {
-                    override fun onError(error: ImageCapture.UseCaseError,
-                                         message: String, exc: Throwable?) {
+                    override fun onError(
+                        error: ImageCapture.UseCaseError,
+                        message: String, exc: Throwable?
+                    ) {
                         val msg = "Photo capture failed: $message"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         Log.e("CameraXApp", msg)
@@ -100,6 +107,7 @@ class exerciseCamera_right : AppCompatActivity() {
 
         //이미지 프로세싱 설정 시작
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
+            setLensFacing(CameraX.LensFacing.FRONT)
             // 이미지 분석을 위한 쓰레드를 하나 생성합니다.
             val analyzerThread = HandlerThread("LuminosityAnalysis").apply { start() }
             setCallbackHandler(Handler(analyzerThread.looper))
@@ -137,11 +145,20 @@ class exerciseCamera_right : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exercise_camera)
+        setContentView(R.layout.exercise_camera_right
+        )
         viewFinder = findViewById(R.id.view_finder)
+
+//        val nextIntent = Intent(this, exerciseCamera::class.java)
+//        startActivity(nextIntent)
+
+        next_btn2.setOnClickListener {
+            val intent2 = Intent(this, exerciseCamera::class.java)
+            startActivity(intent2)
+        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -156,14 +173,17 @@ class exerciseCamera_right : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 viewFinder.post { startCamera() }
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "권한이 허용되지 않았습니다.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -172,7 +192,8 @@ class exerciseCamera_right : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
-                    this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    this, permission
+                ) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
@@ -226,39 +247,40 @@ class exerciseCamera_right : AppCompatActivity() {
                 var imgBitmap:Bitmap = image.image!!.toBitmap()
 
                 var out:ByteArrayOutputStream = ByteArrayOutputStream();
-                imgBitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
+                imgBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
                 var b:ByteArray = out.toByteArray()
-                var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
+                var imageEncoded:String = Base64.encodeToString(b, Base64.DEFAULT)
 
-                val queue = Volley.newRequestQueue(exerciseCamera.context())
+                val queue = Volley.newRequestQueue(exerciseCamera_right.context())
                 val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
-                        Response.Listener<String> { response ->
-                            // Display the first 500 characters of the response string.
-                            val jsonStr = "{\"s\":0}"
+                    Response.Listener<String> { response ->
+                        // Display the first 500 characters of the response string.
+                        val jsonStr = "{\"s\":0}"
 
-                            try {
-                                val obj = JSONObject(response)
-                                val gaze_state = obj.getString("gaze_state")
-                                val left_pupil = obj.getString("left_pupil")
-                                val right_pupil = obj.getString("right_pupil")
-                                Log.d("CameraXApp","겟스트링 완료")
-                                Log.d("CameraXApp","gaze_state: $gaze_state")
-                                Log.d("CameraXApp","left_pupil: $left_pupil")
-                                Log.d("CameraXApp","right_pupil: $right_pupil")
-                                Log.d("CameraXApp","json출력완료")
+                        try {
+                            val obj = JSONObject(response)
+                            val gaze_state = obj.getString("gaze_state")
+                            val left_pupil = obj.getString("left_pupil")
+                            val right_pupil = obj.getString("right_pupil")
 
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
-                            }
-                            Log.d("CameraXApp", "Response is: ${response}")
-                        },
-                        Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
+                            Log.d("CameraXApp", "겟스트링 완료")
+                            Log.d("CameraXApp", "gaze_state: $gaze_state")
+                            Log.d("CameraXApp", "left_pupil: $left_pupil")
+                            Log.d("CameraXApp", "right_pupil: $right_pupil")
+                            Log.d("CameraXApp", "json출력완료")
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                        Log.d("CameraXApp", "Response is: ${response}")
+                    },
+                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
-                    override fun getParams() : Map<String,String> {
+                    override fun getParams() : Map<String, String> {
                         val params: MutableMap<String, String> = HashMap()
                         params["img"] = imageEncoded
                         return params
@@ -286,6 +308,10 @@ class exerciseCamera_right : AppCompatActivity() {
                 // 마지막 분석한 프레임의 타임스탬프로 업데이트한다.
                 lastAnalyzedTimestamp = currentTimestamp
             }
+        }
+
+        private fun startActivity(nextExer: Context) {
+
         }
     }
 }

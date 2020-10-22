@@ -15,12 +15,14 @@ import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
+import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -79,12 +81,16 @@ class exerciseCamera_left : AppCompatActivity() {
 
         val imageCapture = ImageCapture(imageCaptureConfig)
         findViewById<ImageButton>(R.id.capture_button).setOnClickListener {
-            val file = File(externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg")
+            val file = File(
+                externalMediaDirs.first(),
+                "${System.currentTimeMillis()}.jpg"
+            )
             imageCapture.takePicture(file,
                 object : ImageCapture.OnImageSavedListener {
-                    override fun onError(error: ImageCapture.UseCaseError,
-                                         message: String, exc: Throwable?) {
+                    override fun onError(
+                        error: ImageCapture.UseCaseError,
+                        message: String, exc: Throwable?
+                    ) {
                         val msg = "Photo capture failed: $message"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         Log.e("CameraXApp", msg)
@@ -146,6 +152,14 @@ class exerciseCamera_left : AppCompatActivity() {
         setContentView(R.layout.exercise_camera_left)
         viewFinder = findViewById(R.id.view_finder)
 
+//        val nextIntent = Intent(this, exerciseCamera::class.java)
+//        startActivity(nextIntent)
+
+        next_btn1.setOnClickListener {
+            val nextIntent = Intent(this, exerciseCamera::class.java)
+            startActivity(nextIntent)
+        }
+
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
         } else {
@@ -159,14 +173,17 @@ class exerciseCamera_left : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 viewFinder.post { startCamera() }
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "권한이 허용되지 않았습니다.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -175,7 +192,8 @@ class exerciseCamera_left : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
-                    this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    this, permission
+                ) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
@@ -229,9 +247,9 @@ class exerciseCamera_left : AppCompatActivity() {
                 var imgBitmap:Bitmap = image.image!!.toBitmap()
 
                 var out:ByteArrayOutputStream = ByteArrayOutputStream();
-                imgBitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
+                imgBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
                 var b:ByteArray = out.toByteArray()
-                var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
+                var imageEncoded:String = Base64.encodeToString(b, Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(exerciseCamera_left.context())
                 val url = "http://172.30.1.15:9000/re"
@@ -244,14 +262,22 @@ class exerciseCamera_left : AppCompatActivity() {
 
                         try {
                             val obj = JSONObject(response)
-                            val gaze_state = obj.getString("gaze_state")
+                            var gaze_state = obj.getString("gaze_state")
                             val left_pupil = obj.getString("left_pupil")
                             val right_pupil = obj.getString("right_pupil")
-                            Log.d("CameraXApp","겟스트링 완료")
-                            Log.d("CameraXApp","gaze_state: $gaze_state")
-                            Log.d("CameraXApp","left_pupil: $left_pupil")
-                            Log.d("CameraXApp","right_pupil: $right_pupil")
-                            Log.d("CameraXApp","json출력완료")
+
+                            Log.d("CameraXApp", "겟스트링 완료")
+                            Log.d("CameraXApp", "gaze_state: $gaze_state")
+                            Log.d("CameraXApp", "left_pupil: $left_pupil")
+                            Log.d("CameraXApp", "right_pupil: $right_pupil")
+                            Log.d("CameraXApp", "json출력완료")
+
+//                            if (gaze_state.equals("Looking center")){
+//
+//                                var nextIntent = Intent(this, exerciseCamera::class.java)
+//                                startActivity(nextIntent)
+//
+//                            }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()
@@ -261,7 +287,7 @@ class exerciseCamera_left : AppCompatActivity() {
                     Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
-                    override fun getParams() : Map<String,String> {
+                    override fun getParams() : Map<String, String> {
                         val params: MutableMap<String, String> = HashMap()
                         params["img"] = imageEncoded
                         return params
@@ -290,5 +316,7 @@ class exerciseCamera_left : AppCompatActivity() {
                 lastAnalyzedTimestamp = currentTimestamp
             }
         }
+
+
     }
 }
