@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun startCamera() {
         //미리보기 설정 시작
         val previewConfig = PreviewConfig.Builder().apply {
+            setLensFacing(CameraX.LensFacing.FRONT)
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(640, 640))
         }.build()
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         //사진찍기 설정 시작
         val imageCaptureConfig = ImageCaptureConfig.Builder()
             .apply {
+                setLensFacing(CameraX.LensFacing.FRONT)
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
             }.build()
@@ -101,6 +103,7 @@ class MainActivity : AppCompatActivity() {
 
         //이미지 프로세싱 설정 시작
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
+            setLensFacing(CameraX.LensFacing.FRONT)
             // 이미지 분석을 위한 쓰레드를 하나 생성합니다.
             val analyzerThread = HandlerThread("LuminosityAnalysis").apply { start() }
             setCallbackHandler(Handler(analyzerThread.looper))
@@ -239,7 +242,7 @@ class MainActivity : AppCompatActivity() {
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.15:9000/re"
+                val url = "http://172.30.1.13:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
