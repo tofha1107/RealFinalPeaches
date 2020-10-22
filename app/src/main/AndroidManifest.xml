@@ -41,6 +41,10 @@
         <activity android:name=".exerciseCamera">
 
         </activity>
+        <activity android:name=".exerciseCamera_left">
+
+        </activity>
+        <activity android:name=".exerciseCamera_right"></activity>
 
         <activity android:name=".ClosePage"></activity>
 

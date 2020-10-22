@@ -36,7 +36,7 @@ import java.nio.ByteBuffer
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
-class exerciseCamera : AppCompatActivity() {
+class exerciseCamera_right : AppCompatActivity() {
 
     private lateinit var viewFinder: TextureView
 
@@ -45,7 +45,7 @@ class exerciseCamera : AppCompatActivity() {
     }
 
     companion object {
-        private var instance: exerciseCamera? = null
+        private var instance: exerciseCamera_right? = null
 
         fun context() : Context {
             return instance!!.applicationContext
