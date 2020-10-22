@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +25,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private Intent intent;
 
     private Timer timer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         button14.setOnClickListener(this);
 
         intent = getIntent();
+
+        settingTime = 0;
 
     }
 
@@ -91,9 +95,16 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         }
 
         if (v.getId() == R.id.button_choose) {
-            intent = new Intent(getApplicationContext(), EyePage.class);
-            intent.putExtra("settingTime", settingTime);
-            startActivity(intent);
+
+            if(settingTime == 0){
+                Toast.makeText(this, "사용 시간을 설정해주세요", Toast.LENGTH_LONG).show();
+
+            }
+
+            }else{
+                intent = new Intent(getApplicationContext(), EyePage.class);
+                intent.putExtra("settingTime", settingTime);
+                startActivity(intent);
         }
 
 
