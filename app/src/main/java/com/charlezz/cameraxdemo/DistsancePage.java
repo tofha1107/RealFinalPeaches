@@ -24,6 +24,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private Button button14;
     private int settingTime;
     private Intent intent;
+    private String distance;
 
     private Timer timer;
 
@@ -49,6 +50,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         button14.setOnClickListener(this);
 
         intent = getIntent();
+        distance = intent.getExtras().getString("distance");
 
         settingTime = 0;
 
@@ -107,7 +109,8 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
 
             }else{
                 intent = new Intent(getApplicationContext(), EyePage.class);
-//               intent.putExtra("settingTime", settingTime);
+                intent.putExtra("distance", distance);
+
                 timeResetClasss.count_down_receive = settingTime;
 //            Log.d("count_down_receive", ""+timeResetClasss.count_down_receive);
                 startActivity(intent);

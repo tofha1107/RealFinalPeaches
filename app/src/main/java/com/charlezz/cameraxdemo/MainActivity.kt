@@ -15,15 +15,15 @@ import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
-import android.widget.ImageButton
-import android.widget.Toast
+import android.view.View
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.exifinterface.media.ExifInterface
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -34,13 +34,11 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.io.IOException
-import java.io.OutputStream
 import java.nio.ByteBuffer
-import java.util.concurrent.TimeUnit
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+private lateinit var obj: JSONObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private var instance: MainActivity? = null
+        var instance: MainActivity? = null
 
         fun context() : Context {
             return instance!!.applicationContext
@@ -60,14 +58,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun startCamera() {
         //미리보기 설정 시작
+//        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         val previewConfig = PreviewConfig.Builder().apply {
             setLensFacing(CameraX.LensFacing.FRONT)
-
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(640, 640))
         }.build()
 
         val preview = Preview(previewConfig)
+
         preview.setOnPreviewOutputUpdateListener {
             viewFinder.surfaceTexture = it.surfaceTexture
             updateTransform()
@@ -80,29 +79,40 @@ class MainActivity : AppCompatActivity() {
                 setLensFacing(CameraX.LensFacing.FRONT)
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
-        findViewById<AppCompatButton>(R.id.capture_button).setOnClickListener {
-            val file = File(externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg")
-            imageCapture.takePicture(file,
-                object : ImageCapture.OnImageSavedListener {
-                    override fun onError(error: ImageCapture.UseCaseError,
-                                         message: String, exc: Throwable?) {
-                        val msg = "Photo capture failed: $message"
-                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                        Log.e("CameraXApp", msg)
-                        exc?.printStackTrace()
-                    }
 
-                    override fun onImageSaved(file: File) {
-                        val msg = "사진 경로 : ${file.absolutePath}"
-                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-                        Log.d("CameraXApp", msg)
-                    }
-                })
+        //버튼 클릭 이벤트
+        findViewById<AppCompatButton>(R.id.capture_button).setOnClickListener {
+
+//            val file = File(externalMediaDirs.first(),
+//                "${System.currentTimeMillis()}.jpg")
+//            imageCapture.takePicture(file,
+//                object : ImageCapture.OnImageSavedListener {
+//                    override fun onError(error: ImageCapture.UseCaseError,
+//                                         message: String, exc: Throwable?) {
+//                        val msg = "Photo capture failed: $message"
+//                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+//                        Log.e("CameraXApp", msg)
+//                        exc?.printStackTrace()
+//                    }
+//
+//                    override fun onImageSaved(file: File) {
+//                        val msg = "사진 경로 : ${file.absolutePath}"
+//                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+//                        Log.d("CameraXApp", msg)
+////                        Log.d("CameraXApp", ""+obj.getString("dist"))
+//                    }
+//                })
+//            화면전환 기능
+            val intent = Intent(this, DistsancePage::class.java)
+            intent.putExtra("distance",""+obj.getString("dist"))
+            startActivity(intent)
         }
+
+
         //사진찍기 설정 끝
 
         //이미지 프로세싱 설정 시작
@@ -147,12 +157,17 @@ class MainActivity : AppCompatActivity() {
 
     var xmlTextView : TextView? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewFinder = findViewById(R.id.view_finder)
         xmlTextView = findViewById(R.id.distance)
 
+//        button7.setOnClickListener {
+//            startActivity(Intent(this, distance::class.java))
+//            finish()
+//        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -163,13 +178,6 @@ class MainActivity : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
-
-//        test.setOnClickListener{
-//
-//            test2.setText("sadf");
-//            val intent = Intent(this, MainActivity2::class.java)
-//            startActivity(intent);
-//        }
 
     }
 
@@ -237,7 +245,7 @@ class MainActivity : AppCompatActivity() {
             val currentTimestamp = System.currentTimeMillis()
             // 매프레임을 계산하진 않고 1초마다 한번씩 정도 계산
             // if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
-            if (currentTimestamp - lastAnalyzedTimestamp >= 1000) {
+            if (currentTimestamp - lastAnalyzedTimestamp >= 500) {
                 var imgFormat = image.format
                 Log.d("CameraXApp", "imgFormat: $imgFormat")
 
@@ -249,7 +257,7 @@ class MainActivity : AppCompatActivity() {
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.15:9000/re"
+                val url = "http://172.30.1.22:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
@@ -257,16 +265,22 @@ class MainActivity : AppCompatActivity() {
                         // Display the first 500 characters of the response string
                         val jsonStr = "{\"s\":0}"
 
-                        try {
-                            val obj = JSONObject(response)
+                        try
+                        {
+
+                            obj = JSONObject(response)
+//                            val dist = obj.getString("dist")
+
                             Log.d("CameraXApp",obj.getString("dist"))
                             Log.d("CameraXApp","json출력완료")
-                            MainActivity.instance?.xmlTextView?.setText(obj.getString("dist"))
+                            instance?.xmlTextView?.setText(obj.getString("dist")+" CM")
 //                            Log.d("CameraXApp","텍스트뷰출력완료")
+
+
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
-                            Log.d("CameraXApp", "Response is: ${response}")
+                        Log.d("CameraXApp", "Response is: ${response}")
                     },
                     Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
