@@ -43,7 +43,11 @@ public class ClosePage extends AppCompatActivity implements View.OnClickListener
             startActivity(intent);
         }
     }
+    @Override
+    public void onBackPressed()
+    {
 
+    }
     public void startAlarm(){
         Intent intent = new Intent(this, ClosePage.class);
         PendingIntent pIntent = PendingIntent.getBroadcast(this,0,intent,0);

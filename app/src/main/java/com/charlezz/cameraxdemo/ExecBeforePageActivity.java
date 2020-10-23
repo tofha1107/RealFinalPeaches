@@ -27,6 +27,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
     private Button button6;   // 설정한 눈운동주기 시간 나타내기
     private Button button4;  // 눈운동 시작 버튼
+    private Button button5; //거리 값
 
     long mNow;
     Date mDate;
@@ -37,6 +38,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     private Timer timer;
     Intent intent;
 
+    String distance;
     int settingTime; // 사용시간
     int moveTime; // 눈운동 주기
     int real_settingTime; // 눈 운동 주기 분으로 바꾼거
@@ -54,6 +56,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         //Log.v("timetimetime",time+"ㅠㅠ");
 //        moveTime = intent.getExtras().getInt("moveTime");
 //        settingTime= intent.getExtras().getInt("settingTime");
+        button5.setText(String.valueOf(distance+"\nCM"));
         settingTime = timeResetClasss.count_down_receive;
         moveTime = timeResetClasss.eye_exe_receive;
 
@@ -68,6 +71,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         real_start_button = (Button) findViewById(R.id.real_start_button);
         button6 = (Button) findViewById(R.id.button6);
+        button5 = (Button) findViewById(R.id.button5);
         button4 = (Button) findViewById(R.id.button4);
         reset_button = (Button) findViewById(R.id.reset_button);
 
@@ -122,6 +126,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
             // 시간설정
 
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
+            intent.putExtra("distance", distance);
 //            intent.putExtra("settingTime", settingTime);
 //            intent.putExtra("moveTime", moveTime);
 

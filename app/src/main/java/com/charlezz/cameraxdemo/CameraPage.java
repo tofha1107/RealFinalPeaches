@@ -26,7 +26,7 @@ public class CameraPage extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.face_button){
-            Intent intent = new Intent(getApplicationContext(), DistsancePage.class);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
 

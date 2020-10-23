@@ -12,17 +12,17 @@
     tools:context=".EyePage">
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="413dp"
         android:layout_height="225dp"
         android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.638"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.129">
 
         <Button
             android:id="@+id/time10"
@@ -143,6 +143,7 @@
         android:id="@+id/textView12"
         android:layout_width="275dp"
         android:layout_height="96dp"
+        android:layout_marginTop="44dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"

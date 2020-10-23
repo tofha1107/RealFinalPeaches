@@ -156,6 +156,8 @@ class exerciseCamera_left : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
+
+
     var xmlTextView : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -357,5 +359,8 @@ class exerciseCamera_left : AppCompatActivity() {
         }
 
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

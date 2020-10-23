@@ -36,6 +36,10 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
+//         거리값 가져오기
+        intent = getIntent();
+        time = intent.getExtras().getInt("distance");
+
 
         // 시간설정값 가져오기
 //        intent = getIntent();
@@ -111,7 +115,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
     public void onClick(View v) {
         if (v.getId() == R.id.end_imd_button) {
-            Intent intent = new Intent(getApplicationContext(), ClosePage.class);
+            Intent intent = new Intent(getApplicationContext(), PwPage.class);
             startActivity(intent);
         }
     }
