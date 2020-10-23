@@ -52,15 +52,17 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         intent = getIntent();
 
         //Log.v("timetimetime",time+"ㅠㅠ");
-        moveTime = intent.getExtras().getInt("moveTime");
-        settingTime= intent.getExtras().getInt("settingTime");
+//        moveTime = intent.getExtras().getInt("moveTime");
+//        settingTime= intent.getExtras().getInt("settingTime");
+        settingTime = timeResetClasss.count_down_receive;
+        moveTime = timeResetClasss.eye_exe_receive;
 
         long reservationTime = System.currentTimeMillis() + settingTime ;
         SimpleDateFormat dateFormat = new SimpleDateFormat("kk:mm");
         String curTime = dateFormat.format(new Date(reservationTime));
 
 
-        Log.v("timetimetime",settingTime+"ㅠㅠ");
+//        Log.v("timetimetime",settingTime+"ㅠㅠ");
 
 
 
@@ -102,6 +104,11 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         mDate = new Date(mNow);
         return mFormat.format(mDate);
     }
+    @Override
+    public void onBackPressed()
+    {
+
+    }
 
 
     @Override
@@ -115,8 +122,8 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
             // 시간설정
 
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
-            intent.putExtra("settingTime", settingTime);
-            intent.putExtra("moveTime", moveTime);
+//            intent.putExtra("settingTime", settingTime);
+//            intent.putExtra("moveTime", moveTime);
 
             startActivity(intent);
 

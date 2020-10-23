@@ -33,15 +33,18 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     int moveTime;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
 
         // 시간설정값 가져오기
-        intent = getIntent();
-        time = intent.getExtras().getInt("settingTime");
+//        intent = getIntent();
+        //time = intent.getExtras().getInt("settingTime");
+        time = timeResetClasss.count_down_receive;
+
         // 눈운동 주기 가져오기
-        moveTime = intent.getExtras().getInt("moveTime");
+        //moveTime = intent.getExtras().getInt("moveTime");
+        moveTime = timeResetClasss.eye_exe_receive;
 
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -51,6 +54,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
             }
         };
 
+
         TimerTask timerTask2 = new TimerTask() {
             @Override
             public void run() { // TimerTask 2개 실행
@@ -58,6 +62,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
             }
         };
+
 
         TimerTask timerTask3 = new TimerTask() {
             @Override
@@ -72,6 +77,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
         timer3 = new Timer();
 
         timer.schedule(timerTask, time);
+
         if(moveTime == 0){
 
 
@@ -87,6 +93,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
         MILLISINFUTURE = time;
         count = time;
+        Log.v("받아온시간",""+count);
         bun = (MILLISINFUTURE / (60*1000));
         cho = (MILLISINFUTURE % (60 * 1000)) / 1000;
 
@@ -108,13 +115,20 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
         }
     }
+    @Override
+    public void onBackPressed()
+    {
 
+    }
     public void countDownTimer(){
 
         countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
                 using_time_view.setText(bun+"분"+cho+"초");
+//                bun = (count / (60*1000));
+//                cho = (count % (60 * 1000)) / 1000;
 
+                using_time_view.setText(bun+"분"+cho+"초");
                  if (cho == 0){
                  cho = 60;
                  bun--;}

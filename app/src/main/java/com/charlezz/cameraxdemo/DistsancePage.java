@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -50,6 +51,11 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
 
         settingTime = 0;
+
+    }
+    @Override
+    public void onBackPressed()
+    {
 
     }
 
@@ -99,13 +105,15 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             if(settingTime == 0){
                 Toast.makeText(this, "사용 시간을 설정해주세요", Toast.LENGTH_LONG).show();
 
-            }
-
             }else{
                 intent = new Intent(getApplicationContext(), EyePage.class);
-                intent.putExtra("settingTime", settingTime);
+//               intent.putExtra("settingTime", settingTime);
+                timeResetClasss.count_down_receive = settingTime;
+//            Log.d("count_down_receive", ""+timeResetClasss.count_down_receive);
                 startActivity(intent);
-        }
+            }
+
+            }
 
 
 

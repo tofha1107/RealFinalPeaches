@@ -43,7 +43,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         time60.setOnClickListener(this);
 
         intent = getIntent();
-        settingTime = intent.getExtras().getInt("settingTime");
+//       settingTime = intent.getExtras().getInt("settingTime");
         moveTime = 0;
 
         //moveTime = intent.getExtras().getInt("moveTime");
@@ -54,17 +54,21 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
     }
 
     @Override
+    public void onBackPressed()
+    {
+
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_choose2) {
 
             intent = new Intent(getApplicationContext(), step4_record.class);
             intent.putExtra("settingTime", settingTime);
             intent.putExtra("moveTime", moveTime);
+            timeResetClasss.eye_exe_receive = moveTime;
+            Log.v("eye_exe_receive",timeResetClasss.eye_exe_receive+",");
             startActivity(intent);
-
-//            Intent intent = getIntent();
-//            String name = intent.getExtras().getString("name");
-//            int age = intent.getExtras().getInt("age");
 
         }
 
@@ -83,7 +87,8 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 10*60*1000;
+            moveTime = 1000*30;
+
         }
 
         if (v.getId() == R.id.time60) {
