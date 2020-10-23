@@ -1,6 +1,7 @@
 package com.charlezz.cameraxdemo
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,8 +16,9 @@ import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
-import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
@@ -28,7 +30,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.exercise_camera_left.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -38,6 +39,9 @@ import java.nio.ByteBuffer
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 var left_cnt = 0;
+var right_cnt = 0;
+var blink_cnt = 0;
+var center_cnt = 0;
 
 class exerciseCamera_left : AppCompatActivity() {
 
@@ -152,19 +156,16 @@ class exerciseCamera_left : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
-
+    var xmlTextView : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exercise_camera_left)
+        setContentView(R.layout.eyes_layout)
+        val textView : TextView = TextView(this)
         viewFinder = findViewById(R.id.view_finder)
+        xmlTextView = findViewById(R.id.title_btn)
 
 //        val nextIntent = Intent(this, exerciseCamera::class.java)
 //        startActivity(nextIntent)
-
-//        next_btn1.setOnClickListener {
-//            val nextIntent = Intent(this, exerciseCamera::class.java)
-//            startActivity(nextIntent)
-//        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -268,24 +269,52 @@ class exerciseCamera_left : AppCompatActivity() {
                         try {
                             val obj = JSONObject(response)
                             val gaze_state = obj.getString("gaze_state")
-                            val left_pupil = obj.getString("left_pupil")
-                            val right_pupil = obj.getString("right_pupil")
 
-                            Log.d("CameraXApp", "겟스트링 완료")
+//                            Log.d("CameraXApp", "겟스트링 완료")
                             Log.d("CameraXApp", "gaze_state: $gaze_state")
-                            Log.d("CameraXApp", "left_pupil: $left_pupil")
-                            Log.d("CameraXApp", "right_pupil: $right_pupil")
-                            Log.d("CameraXApp", "json출력완료")
+//                            Log.d("CameraXApp", "json출력완료")
 
-                            if (gaze_state.equals("Looking left")){
+                            if (gaze_state.equals("Looking left")) {
                                 left_cnt += 1;
+                                Log.d("CameraXApp", " " + left_cnt);
+                                Log.d("CameraXApp", "Left 출력완료")
+
+                                if (left_cnt >= 3) {
+                                    exerciseCamera_left.instance?.xmlTextView?.setText("시선을 오른쪽으로 \n5초 동안 유지하세요")
+                                }
                             }
+                            if (gaze_state.equals("Looking right")) {
+                                right_cnt += 1;
+                                Log.d("CameraXApp", " " + right_cnt);
+                                Log.d("CameraXApp", "Right 출력완료")
 
-                            Log.d("CameraXApp","" + left_cnt);
+                                if (right_cnt >= 3) {
+                                    exerciseCamera_left.instance?.xmlTextView?.setText("눈을 10번 깜빡이세요")
+                                }
+                            }
+                            if (gaze_state.equals("Blinking")) {
+                                blink_cnt += 1;
+                                Log.d("CameraXApp", " " + blink_cnt);
+                                Log.d("CameraXApp", "blinking 출력완료")
+                                if (blink_cnt >= 3) {
+                                    exerciseCamera_left.instance?.xmlTextView?.setText("운동완료")
+                                }
+                            }
+                            if (gaze_state.equals("Looking center")) {
 
-                            if (left_cnt>=5){
-                                 var nextIntent = Intent(exerciseCamera_left.context(), exerciseCamera::class.java)
-                                 startActivity(exerciseCamera.context(),nextIntent,null)
+                                center_cnt += 1;
+                                Log.d("CameraXApp", " " + center_cnt);
+                                Log.d("CameraXApp", "center_cnt 출력완료")
+                                if (center_cnt >= 3) {
+
+
+                                    System.exit(0)
+
+                                    val intent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
+                                    val pendingIntent:PendingIntent = PendingIntent.getActivity(exerciseCamera_left.context(), 0, intent, 0);
+                                    pendingIntent.send();
+                                }
+
 
                             }
 
@@ -309,8 +338,8 @@ class exerciseCamera_left : AppCompatActivity() {
                 queue.add(stringRequest)
 
 
-                Log.d("CameraXApp", "height: ${imgBitmap.height}")
-                Log.d("CameraXApp", "width: ${imgBitmap.width}")
+//                Log.d("CameraXApp", "height: ${imgBitmap.height}")
+//                Log.d("CameraXApp", "width: ${imgBitmap.width}")
 
                 // 이미지 포맷이 YUV이므로 image.planes[0]으로 Y값을 구할수 있다.
                 val buffer = image.planes[0].buffer
@@ -321,7 +350,7 @@ class exerciseCamera_left : AppCompatActivity() {
                 // 이미지의 평균 휘도를 구한다
                 val luma:Double = pixels.average()
                 // 로그에 휘도 출력
-                Log.d("CameraXApp", "Average luminosity: $luma")
+//                Log.d("CameraXApp", "Average luminosity: $luma")
                 // 마지막 분석한 프레임의 타임스탬프로 업데이트한다.
                 lastAnalyzedTimestamp = currentTimestamp
             }

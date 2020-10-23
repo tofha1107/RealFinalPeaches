@@ -1,6 +1,7 @@
 package com.charlezz.cameraxdemo
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -26,8 +27,6 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.exercise_camera.*
-import kotlinx.android.synthetic.main.exercise_camera_left.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -36,7 +35,7 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-var blink_cnt = 0;
+
 
 class exerciseCamera : AppCompatActivity() {
 
@@ -79,12 +78,16 @@ class exerciseCamera : AppCompatActivity() {
 
         val imageCapture = ImageCapture(imageCaptureConfig)
         findViewById<ImageButton>(R.id.capture_button).setOnClickListener {
-            val file = File(externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg")
+            val file = File(
+                externalMediaDirs.first(),
+                "${System.currentTimeMillis()}.jpg"
+            )
             imageCapture.takePicture(file,
                 object : ImageCapture.OnImageSavedListener {
-                    override fun onError(error: ImageCapture.UseCaseError,
-                                         message: String, exc: Throwable?) {
+                    override fun onError(
+                        error: ImageCapture.UseCaseError,
+                        message: String, exc: Throwable?
+                    ) {
                         val msg = "Photo capture failed: $message"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         Log.e("CameraXApp", msg)
@@ -139,6 +142,8 @@ class exerciseCamera : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
+    override fun onBackPressed() {}
+
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,14 +163,17 @@ class exerciseCamera : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 viewFinder.post { startCamera() }
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "권한이 허용되지 않았습니다.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -174,7 +182,8 @@ class exerciseCamera : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
-                    this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    this, permission
+                ) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
@@ -228,51 +237,68 @@ class exerciseCamera : AppCompatActivity() {
                 var imgBitmap:Bitmap = image.image!!.toBitmap()
 
                 var out:ByteArrayOutputStream = ByteArrayOutputStream();
-                imgBitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
+                imgBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
                 var b:ByteArray = out.toByteArray()
-                var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
+                var imageEncoded:String = Base64.encodeToString(b, Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(exerciseCamera.context())
                 val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,
-                        Response.Listener<String> { response ->
-                            // Display the first 500 characters of the response string.
-                            val jsonStr = "{\"s\":0}"
+                    Response.Listener<String> { response ->
+                        // Display the first 500 characters of the response string.
+                        val jsonStr = "{\"s\":0}"
 
-                            try {
-                                val obj = JSONObject(response)
-                                val gaze_state = obj.getString("gaze_state")
-                                val left_pupil = obj.getString("left_pupil")
-                                val right_pupil = obj.getString("right_pupil")
-//                                Log.d("CameraXApp","겟스트링 완료")
-//                                Log.d("CameraXApp","gaze_state: $gaze_state")
-//                                Log.d("CameraXApp","left_pupil: $left_pupil")
-//                                Log.d("CameraXApp","right_pupil: $right_pupil")
-                                  Log.d("CameraXApp","json출력완료")
+                        try {
+                            val obj = JSONObject(response)
+                            val gaze_state = obj.getString("gaze_state")
+                            val left_pupil = obj.getString("left_pupil")
+                            val right_pupil = obj.getString("right_pupil")
 
-                                if (gaze_state.equals("Blinking")){
-                                    blink_cnt += 1;
+                            Log.d("CameraXApp", "겟스트링 완료")
+                            Log.d("CameraXApp", "gaze_state: $gaze_state")
+                            Log.d("CameraXApp", "left_pupil: $left_pupil")
+                            Log.d("CameraXApp", "right_pupil: $right_pupil")
+                            Log.d("CameraXApp", "json출력완료")
+
+                            if (gaze_state.equals("Looking center")) {
+                                blink_cnt += 1;
+
+                                Log.d("CameraXApp", "" + blink_cnt);
+
+                                if (left_cnt > 3) {
+//                                    val nextIntent = Intent(exerciseCamera_left.context(), exerciseCamera_right::class.java)
+//                                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                    startActivity(exerciseCamera_left.context(), nextIntent, null)
+
+                                    val intent = Intent(
+                                        exerciseCamera.context(),
+                                        ExecutionPage::class.java
+                                    )
+
+                                    val pendingIntent: PendingIntent = PendingIntent.getActivity(
+                                        exerciseCamera.context(),
+                                        0,
+                                        intent,
+                                        0
+                                    );
+
+                                    pendingIntent.send();
+                                    System.exit(0)
+
                                 }
-
-                                Log.d("CameraXApp","" + blink_cnt);
-
-                                if (blink_cnt>=5){
-                                    var nextIntent = Intent(exerciseCamera.context(), ExecutionPage::class.java)
-                                    ContextCompat.startActivity(context(), nextIntent, null)
-
-                                }
-
-                            } catch (e: JSONException) {
-                                e.printStackTrace()
                             }
-                            Log.d("CameraXApp", "Response is: ${response}")
-                        },
-                        Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
+
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                        Log.d("CameraXApp", "Response is: ${response}")
+                    },
+                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
-                    override fun getParams() : Map<String,String> {
+                    override fun getParams() : Map<String, String> {
                         val params: MutableMap<String, String> = HashMap()
                         params["img"] = imageEncoded
                         return params

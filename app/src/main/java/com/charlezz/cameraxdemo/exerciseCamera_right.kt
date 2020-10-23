@@ -1,6 +1,7 @@
 package com.charlezz.cameraxdemo
 
 import android.Manifest
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,28 +16,29 @@ import android.util.Rational
 import android.util.Size
 import android.view.Surface
 import android.view.TextureView
-import android.view.View
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.exercise_camera_right.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.OutputStream
 import java.nio.ByteBuffer
+import java.util.concurrent.TimeUnit
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-var right_cnt = 0;
+
 
 class exerciseCamera_right : AppCompatActivity() {
 
@@ -57,10 +59,9 @@ class exerciseCamera_right : AppCompatActivity() {
     private fun startCamera() {
         //미리보기 설정 시작
         val previewConfig = PreviewConfig.Builder().apply {
-            setTargetAspectRatio(Rational(1, 1))
-            setTargetResolution(Size(1280, 720))
             setLensFacing(CameraX.LensFacing.FRONT)
-
+            setTargetAspectRatio(Rational(1, 1))
+            setTargetResolution(Size(640, 640))
         }.build()
 
         val preview = Preview(previewConfig)
@@ -74,23 +75,19 @@ class exerciseCamera_right : AppCompatActivity() {
         //사진찍기 설정 시작
         val imageCaptureConfig = ImageCaptureConfig.Builder()
             .apply {
+                setLensFacing(CameraX.LensFacing.FRONT)
                 setTargetAspectRatio(Rational(1, 1))
                 setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
-                setLensFacing(CameraX.LensFacing.FRONT)
             }.build()
 
         val imageCapture = ImageCapture(imageCaptureConfig)
         findViewById<ImageButton>(R.id.capture_button).setOnClickListener {
-            val file = File(
-                externalMediaDirs.first(),
-                "${System.currentTimeMillis()}.jpg"
-            )
+            val file = File(externalMediaDirs.first(),
+                "${System.currentTimeMillis()}.jpg")
             imageCapture.takePicture(file,
                 object : ImageCapture.OnImageSavedListener {
-                    override fun onError(
-                        error: ImageCapture.UseCaseError,
-                        message: String, exc: Throwable?
-                    ) {
+                    override fun onError(error: ImageCapture.UseCaseError,
+                                         message: String, exc: Throwable?) {
                         val msg = "Photo capture failed: $message"
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                         Log.e("CameraXApp", msg)
@@ -108,8 +105,8 @@ class exerciseCamera_right : AppCompatActivity() {
 
         //이미지 프로세싱 설정 시작
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
-            setLensFacing(CameraX.LensFacing.FRONT)
             // 이미지 분석을 위한 쓰레드를 하나 생성합니다.
+            setLensFacing(CameraX.LensFacing.FRONT)
             val analyzerThread = HandlerThread("LuminosityAnalysis").apply { start() }
             setCallbackHandler(Handler(analyzerThread.looper))
             // 하나도 빠짐없이 프레임 전부를 분석하기보다는 매순간 가장 최근 프레임만을 가져와 분석하도록 합니다
@@ -149,17 +146,8 @@ class exerciseCamera_right : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exercise_camera_right
-        )
+        setContentView(R.layout.exercise_camera_right)
         viewFinder = findViewById(R.id.view_finder)
-
-//        val nextIntent = Intent(this, exerciseCamera::class.java)
-//        startActivity(nextIntent)
-
-//        next_btn2.setOnClickListener {
-//            val intent2 = Intent(this, exerciseCamera::class.java)
-//            startActivity(intent2)
-//        }
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
@@ -170,21 +158,17 @@ class exerciseCamera_right : AppCompatActivity() {
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             updateTransform()
         }
-
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray
-    ) {
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
                 viewFinder.post { startCamera() }
             } else {
-                Toast.makeText(
-                    this,
+                Toast.makeText(this,
                     "권한이 허용되지 않았습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    Toast.LENGTH_SHORT).show()
                 finish()
             }
         }
@@ -193,8 +177,7 @@ class exerciseCamera_right : AppCompatActivity() {
     private fun allPermissionsGranted(): Boolean {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
-                    this, permission
-                ) != PackageManager.PERMISSION_GRANTED) {
+                    this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false
             }
         }
@@ -241,16 +224,16 @@ class exerciseCamera_right : AppCompatActivity() {
             val currentTimestamp = System.currentTimeMillis()
             // 매프레임을 계산하진 않고 1초마다 한번씩 정도 계산
             // if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
-            if (currentTimestamp - lastAnalyzedTimestamp >= 1000) {
+            if (currentTimestamp - lastAnalyzedTimestamp >= 50) {
                 var imgFormat = image.format
                 Log.d("CameraXApp", "imgFormat: $imgFormat")
 
                 var imgBitmap:Bitmap = image.image!!.toBitmap()
 
                 var out:ByteArrayOutputStream = ByteArrayOutputStream();
-                imgBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
+                imgBitmap.compress(Bitmap.CompressFormat.JPEG,90,out)
                 var b:ByteArray = out.toByteArray()
-                var imageEncoded:String = Base64.encodeToString(b, Base64.DEFAULT)
+                var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(exerciseCamera_right.context())
                 val url = "http://172.30.1.15:9000/re"
@@ -273,31 +256,37 @@ class exerciseCamera_right : AppCompatActivity() {
                             Log.d("CameraXApp", "right_pupil: $right_pupil")
                             Log.d("CameraXApp", "json출력완료")
 
-                            if (gaze_state.equals("Looking right")){
+                            if (gaze_state.equals("Looking center")) {
                                 right_cnt += 1;
-                            }
 
-                            Log.d("CameraXApp","" + right_cnt);
+                                Log.d("CameraXApp", "" + right_cnt);
 
-                            if (right_cnt>=5){
-                                var nextIntent = Intent(exerciseCamera_right.context(), exerciseCamera::class.java)
-                                ContextCompat.startActivity(
-                                    exerciseCamera.context(),
-                                    nextIntent,
-                                    null
-                                )
+                                    if (right_cnt > 3) {
+//                                    val nextIntent = Intent(exerciseCamera_left.context(), exerciseCamera_right::class.java)
+//                                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                    startActivity(exerciseCamera_left.context(), nextIntent, null)
 
+                                        val intent = Intent(exerciseCamera_right.context(), exerciseCamera::class.java)
+
+                                        val pendingIntent: PendingIntent = PendingIntent.getActivity(exerciseCamera_right.context(), 0, intent, 0);
+
+                                        pendingIntent.send();
+                                        System.exit(0)
+
+                                }
                             }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
+
+
                         Log.d("CameraXApp", "Response is: ${response}")
                     },
                     Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
                 {
                     @Throws(AuthFailureError::class)
-                    override fun getParams() : Map<String, String> {
+                    override fun getParams() : Map<String,String> {
                         val params: MutableMap<String, String> = HashMap()
                         params["img"] = imageEncoded
                         return params
@@ -325,10 +314,6 @@ class exerciseCamera_right : AppCompatActivity() {
                 // 마지막 분석한 프레임의 타임스탬프로 업데이트한다.
                 lastAnalyzedTimestamp = currentTimestamp
             }
-        }
-
-        private fun startActivity(nextExer: Context) {
-
         }
     }
 }

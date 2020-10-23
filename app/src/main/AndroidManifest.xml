@@ -16,66 +16,46 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CameraPage"></activity>
-        <activity android:name=".DistsancePage">
-
-        </activity>
-        <activity android:name=".ExecBeforePageActivity">
-
-        </activity>
-        <activity android:name=".ExecutionPage">
-        </activity>
-        <activity android:name=".EyePage"></activity>
-        <activity android:name=".JoinPage">
-
-        </activity>
-        <activity android:name=".LoginPage">
-
-        </activity>
-        <activity android:name=".MainActivity2"></activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".exerciseCamera">
-
-        </activity>
+        <activity android:name=".testtestttest" />
+        <activity android:name=".CameraPage" />
+        <activity android:name=".DistsancePage" />
+        <activity android:name=".ExecBeforePageActivity" />
+        <activity android:name=".ExecutionPage" />
+        <activity android:name=".EyePage" />
+        <activity android:name=".JoinPage" />
+        <activity android:name=".LoginPage" />
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".exerciseCamera" />
         <activity android:name=".exerciseCamera_left">
-
         </activity>
-        <activity android:name=".exerciseCamera_right">
-
-        </activity>
-
-        <activity android:name=".ClosePage"></activity>
-
-        <activity android:name=".step4_record">
-
-        </activity>
-        <activity android:name=".audioRecord"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"
-            />
-        <activity android:name=".LoadingPage">
+        <activity android:name=".exerciseCamera_right"></activity>
+        <activity android:name=".ClosePage" />
+        <activity android:name=".step4_record" />
+        <activity
+            android:name=".audioRecord"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".LoadingPage" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".videoList">
-        </activity>
-
-        <activity android:name=".AlarmTest">
-
-        </activity>
-
-        <activity android:name=".PlayVideo1"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".PlayVideo2"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".PlayVideo3"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".PlayVideo4"
-            android:screenOrientation="landscape"/>
-
+        <activity android:name=".videoList" />
+        <activity android:name=".AlarmTest" />
+        <activity
+            android:name=".PlayVideo1"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PlayVideo2"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PlayVideo3"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".PlayVideo4"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
