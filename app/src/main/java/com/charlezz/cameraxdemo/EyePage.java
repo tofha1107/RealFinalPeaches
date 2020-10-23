@@ -20,8 +20,8 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
     private Intent intent;
     private int settingTime;
     private int moveTime;
-    int time;
     private String distance;
+    int time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         time60.setOnClickListener(this);
 
         intent = getIntent();
+        distance = intent.getExtras().getString("distance");
 //       settingTime = intent.getExtras().getInt("settingTime");
         moveTime = 0;
 
@@ -51,7 +52,6 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
 //        Log.v("settingTime",settingTime+",");
 //        Toast.makeText(this,"설정한 시간 " + settingTime,Toast.LENGTH_SHORT).show()
-        distance = intent.getExtras().getString("distance");
 
     }
 
@@ -67,8 +67,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
             intent = new Intent(getApplicationContext(), step4_record.class);
             intent.putExtra("distance",distance);
-            //intent.putExtra("settingTime", settingTime);
-            intent.putExtra("moveTime", moveTime);
+
             timeResetClasss.eye_exe_receive = moveTime;
             Log.v("eye_exe_receive",timeResetClasss.eye_exe_receive+",");
             startActivity(intent);
@@ -111,7 +110,6 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             moveTime = 20*60*1000;
         }
-
     }
 
 }
