@@ -29,7 +29,7 @@
         android:layout_marginTop="48dp"
         android:background="@drawable/bar"
         android:fontFamily="@font/tmoneyroundwindextrabold"
-        android:text="녹음중지"
+        android:text="녹음완료"
         android:textColor="@color/colorLightBeige"
         app:layout_constraintEnd_toEndOf="@+id/button"
         app:layout_constraintTop_toBottomOf="@+id/button" />

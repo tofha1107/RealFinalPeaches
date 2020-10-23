@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context="com.charlezz.cameraxdemo.exerciseCamera">
 
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="188dp"
+        android:layout_height="70dp"
+        android:background="@drawable/bar"
+        android:fontFamily="@font/tmoneyroundwindextrabold"
+        android:text="눈 운동 완료!"
+        android:textColor="@color/colorLightBeige"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_finder"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <ImageButton
+        android:id="@+id/capture_button"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_margin="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
     <ImageView
         android:id="@+id/imageView16"
         android:layout_width="115dp"
@@ -17,17 +43,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.171"
         app:srcCompat="@drawable/smile_peach" />
-
-    <ImageButton
-        android:id="@+id/capture_button"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_margin="24dp"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
         android:id="@+id/textView14"

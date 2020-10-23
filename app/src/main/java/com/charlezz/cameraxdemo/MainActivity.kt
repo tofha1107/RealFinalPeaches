@@ -23,6 +23,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.exifinterface.media.ExifInterface
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -33,6 +34,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.IOException
 import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.util.concurrent.TimeUnit
@@ -60,12 +62,12 @@ class MainActivity : AppCompatActivity() {
         //미리보기 설정 시작
         val previewConfig = PreviewConfig.Builder().apply {
             setLensFacing(CameraX.LensFacing.FRONT)
+
             setTargetAspectRatio(Rational(1, 1))
             setTargetResolution(Size(640, 640))
         }.build()
 
         val preview = Preview(previewConfig)
-
         preview.setOnPreviewOutputUpdateListener {
             viewFinder.surfaceTexture = it.surfaceTexture
             updateTransform()
@@ -247,7 +249,7 @@ class MainActivity : AppCompatActivity() {
                 var imageEncoded:String = Base64.encodeToString(b,Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(MainActivity.context())
-                val url = "http://172.30.1.22:9000/re"
+                val url = "http://172.30.1.15:9000/re"
 
                 // Request a string response from the provided URL.
                 val stringRequest = object : StringRequest(Request.Method.POST, url,

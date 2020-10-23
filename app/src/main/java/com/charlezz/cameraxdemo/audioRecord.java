@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 public class audioRecord extends AppCompatActivity implements AutoPermissionsListener  {
     MediaRecorder recorder;
     MediaPlayer player;
+    AppCompatDialog alert;
 
     public static String filename;
 
@@ -75,11 +77,11 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
             }
         });
 
-        Button button4 = findViewById(R.id.button4);
+        final Button button4 = findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ;
+                finish();
             }
         });
 
