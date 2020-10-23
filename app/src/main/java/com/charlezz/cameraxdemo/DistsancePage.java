@@ -52,6 +52,8 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
         distance = intent.getExtras().getString("distance");
 
+        Log.d("CameraXApp", "넘어온값"+distance);
+
         settingTime = 0;
 
     }
