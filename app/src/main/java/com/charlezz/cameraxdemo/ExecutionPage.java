@@ -3,7 +3,6 @@ package com.charlezz.cameraxdemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,21 +27,38 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     private CountDownTimer countDownTimer;
     private Timer timer, timer2, timer3;
     Intent intent;
+    int blink;
+    int static_blink;
     int time;
     int moveTime;
     private String distance;
+    TextView blink_count;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
+
+
 //         거리값 가져오기
-        intent = getIntent();
+//        intent = new Intent(getApplicationContext(), DistsancePage.class);
         //distance = intent.getExtras().getString("distance");
-        distance = intent.getStringExtra("distance");
+//        distance = intent.getStringExtra("distance");
+//        intent = getIntent();
+//        blink2 = intent.getExtras().getInt("blink2");
+        static_blink = timeResetClasss.blink_static_cnt;
+//        Log.d("CameraXApp","누적" + blink +"완료");
+//        Log.d("CameraXApp","스태틱에서" + static_blink);
+
+        blink_count = (TextView) findViewById(R.id.blink_cnt);
+
+        blink_count.setText(Integer.toString(static_blink));
+
+
 
         // 시간설정값 가져오기
 //        intent = getIntent();
+
         //time = intent.getExtras().getInt("settingTime");
         time = timeResetClasss.count_down_receive;
 

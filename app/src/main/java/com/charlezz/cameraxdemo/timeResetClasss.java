@@ -16,6 +16,7 @@ public class timeResetClasss extends AppCompatActivity {
 
     public static int count_down_receive;
     public static int eye_exe_receive;
+    public static int blink_static_cnt;
 
 }
 

@@ -69,7 +69,7 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/blink_cnt" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -108,13 +108,13 @@
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/blink_cnt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/tmoneyroundwindregular"
+        android:text="20"
         android:textColor="@color/colorTitlePink"
         android:textSize="50sp"
-        android:text="20"
         app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintEnd_toStartOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/textView16" />

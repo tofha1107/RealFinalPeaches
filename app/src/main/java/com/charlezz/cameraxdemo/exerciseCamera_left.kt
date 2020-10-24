@@ -54,7 +54,7 @@ class exerciseCamera_left : AppCompatActivity() {
     companion object {
         private var instance: exerciseCamera_left? = null
 
-        fun context() : Context {
+        fun context(): Context {
             return instance!!.applicationContext
         }
     }
@@ -144,7 +144,7 @@ class exerciseCamera_left : AppCompatActivity() {
         val centerY = viewFinder.height / 2f
 
         // Correct preview output to account for display rotation
-        val rotationDegrees = when(viewFinder.display.rotation) {
+        val rotationDegrees = when (viewFinder.display.rotation) {
             Surface.ROTATION_0 -> 0
             Surface.ROTATION_90 -> 90
             Surface.ROTATION_180 -> 180
@@ -157,12 +157,12 @@ class exerciseCamera_left : AppCompatActivity() {
     }
 
 
+    var xmlTextView: TextView? = null
 
-    var xmlTextView : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.eyes_layout)
-        val textView : TextView = TextView(this)
+        val textView: TextView = TextView(this)
         viewFinder = findViewById(R.id.view_finder)
         xmlTextView = findViewById(R.id.title_btn)
 
@@ -170,6 +170,8 @@ class exerciseCamera_left : AppCompatActivity() {
 //        startActivity(nextIntent)
 
         if (allPermissionsGranted()) {
+
+            CameraX.unbindAll()
             viewFinder.post { startCamera() }
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
@@ -201,7 +203,8 @@ class exerciseCamera_left : AppCompatActivity() {
         for (permission in REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(
                     this, permission
-                ) != PackageManager.PERMISSION_GRANTED) {
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 return false
             }
         }
@@ -248,16 +251,16 @@ class exerciseCamera_left : AppCompatActivity() {
             val currentTimestamp = System.currentTimeMillis()
             // 매프레임을 계산하진 않고 1초마다 한번씩 정도 계산
             // if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
-            if (currentTimestamp - lastAnalyzedTimestamp >= 1000) {
+            if (currentTimestamp - lastAnalyzedTimestamp >= 1500) {
                 var imgFormat = image.format
                 Log.d("CameraXApp", "imgFormat: $imgFormat")
 
-                var imgBitmap:Bitmap = image.image!!.toBitmap()
+                var imgBitmap: Bitmap = image.image!!.toBitmap()
 
-                var out:ByteArrayOutputStream = ByteArrayOutputStream();
+                var out: ByteArrayOutputStream = ByteArrayOutputStream();
                 imgBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)
-                var b:ByteArray = out.toByteArray()
-                var imageEncoded:String = Base64.encodeToString(b, Base64.DEFAULT)
+                var b: ByteArray = out.toByteArray()
+                var imageEncoded: String = Base64.encodeToString(b, Base64.DEFAULT)
 
                 val queue = Volley.newRequestQueue(exerciseCamera_left.context())
                 val url = "http://172.30.1.15:9000/re"
@@ -276,58 +279,52 @@ class exerciseCamera_left : AppCompatActivity() {
                             Log.d("CameraXApp", "gaze_state: $gaze_state")
 //                            Log.d("CameraXApp", "json출력완료")
 
-                            if (gaze_state.equals("Looking left")) {
-                                left_cnt += 1;
-                                Log.d("CameraXApp", " " + left_cnt);
-                                Log.d("CameraXApp", "Left 출력완료")
 
-                                if (left_cnt >= 3) {
-                                    exerciseCamera_left.instance?.xmlTextView?.setText("시선을 오른쪽으로 \n5초 동안 유지하세요")
-                                }
+                            if(left_cnt <= 3) {
+                                var cnt = looking_left(gaze_state);
+                            }else{
+                                looking_right(gaze_state);
                             }
-                            if (gaze_state.equals("Looking right")) {
-                                right_cnt += 1;
-                                Log.d("CameraXApp", " " + right_cnt);
-                                Log.d("CameraXApp", "Right 출력완료")
 
-                                if (right_cnt >= 3) {
-                                    exerciseCamera_left.instance?.xmlTextView?.setText("눈을 10번 깜빡이세요")
-                                }
-                            }
-                            if (gaze_state.equals("Blinking")) {
-                                blink_cnt += 1;
-                                Log.d("CameraXApp", " " + blink_cnt);
-                                Log.d("CameraXApp", "blinking 출력완료")
-                                if (blink_cnt >= 3) {
-                                    exerciseCamera_left.instance?.xmlTextView?.setText("운동완료")
-                                }
-                            }
-                            if (gaze_state.equals("Looking center")) {
+                            blinking(gaze_state);
+//                            if (gaze_state.equals("Looking right")) {
+//                                right_cnt += 1;
+//                                Log.d("CameraXApp", " " + right_cnt);
+//                                Log.d("CameraXApp", "Right 출력완료")
+//
+//                                if (right_cnt >= 3) {
+//                                    exerciseCamera_left.instance?.xmlTextView?.setText("눈을 10번 깜빡이세요")
+//                                }
+//                            }
 
-                                center_cnt += 1;
-                                Log.d("CameraXApp", " " + center_cnt);
-                                Log.d("CameraXApp", "center_cnt 출력완료")
-                                if (center_cnt >= 3) {
-
-                                    System.exit(0)
-
-                                    val intent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
-                                    val pendingIntent:PendingIntent = PendingIntent.getActivity(exerciseCamera_left.context(), 0, intent, 0);
-                                    pendingIntent.send();
-                                }
-
-
-                            }
+//                            if (gaze_state.equals("Looking center")) {
+//
+//                                center_cnt += 1;
+//                                Log.d("CameraXApp", " " + center_cnt);
+//                                Log.d("CameraXApp", "center_cnt 출력완료")
+//                                if (center_cnt >= 3) {
+//
+//                                    val nextIntent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
+//                                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                                    startActivity(exerciseCamera_left.context(), nextIntent, null)
+////
+////                                    val intent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
+////                                    val pendingIntent:PendingIntent = PendingIntent.getActivity(exerciseCamera_left.context(), 0, intent, 0);
+////                                    pendingIntent.send();
+//                                    System.exit(0)
+//                                }
+//
+//
+//                            }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()
                         }
                         Log.d("CameraXApp", "Response is: ${response}")
                     },
-                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") })
-                {
+                    Response.ErrorListener { Log.d("CameraXApp", "That didn't work!") }) {
                     @Throws(AuthFailureError::class)
-                    override fun getParams() : Map<String, String> {
+                    override fun getParams(): Map<String, String> {
                         val params: MutableMap<String, String> = HashMap()
                         params["img"] = imageEncoded
                         return params
@@ -345,21 +342,61 @@ class exerciseCamera_left : AppCompatActivity() {
                 // 이미지 포맷이 YUV이므로 image.planes[0]으로 Y값을 구할수 있다.
                 val buffer = image.planes[0].buffer
                 // 이미지 데이터를 바이트배열로 추출
-                val data:ByteArray = buffer.toByteArray()
+                val data: ByteArray = buffer.toByteArray()
                 // 픽셀 하나하나를 유의미한 데이터리스트로 만든다
-                val pixels:List<Int> = data.map { it.toInt() and 0xFF }
+                val pixels: List<Int> = data.map { it.toInt() and 0xFF }
                 // 이미지의 평균 휘도를 구한다
-                val luma:Double = pixels.average()
+                val luma: Double = pixels.average()
                 // 로그에 휘도 출력
 //                Log.d("CameraXApp", "Average luminosity: $luma")
                 // 마지막 분석한 프레임의 타임스탬프로 업데이트한다.
                 lastAnalyzedTimestamp = currentTimestamp
+
+
+            }
+        }
+        private  fun looking_left(gaze_state:String):Int{
+            if (gaze_state.equals("Looking left")) {
+                left_cnt += 1;
+                Log.d("CameraXApp", " " + left_cnt);
+                Log.d("CameraXApp", "Left 출력완료")
+
+                if (left_cnt >= 3) {
+                    exerciseCamera_left.instance?.xmlTextView?.setText("시선을 오른쪽으로 \n5초 동안 유지하세요")
+                }
+            }
+
+            return left_cnt;
+        }
+
+        private fun looking_right(gaze_state: String){
+            if (gaze_state.equals("Looking right")) {
+                right_cnt += 1;
+                Log.d("CameraXApp", " " + right_cnt);
+                Log.d("CameraXApp", "Right 출력완료")
+
+                if (right_cnt >= 3) {
+                    exerciseCamera_left.instance?.xmlTextView?.setText("눈을 10번 깜빡이세요")
+                }
+            }
+        }
+
+        private fun blinking(gaze_state: String){
+            if (gaze_state.equals("Blinking")) {
+                blink_cnt += 1;
+                Log.d("CameraXApp", " " + blink_cnt);
+                Log.d("CameraXApp", "blinking 출력완료")
+
+                if (blink_cnt >= 8) {
+                    //exerciseCamera_left.instance?.xmlTextView?.setText("운동완료")
+                    val nextIntent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
+                    nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(exerciseCamera_left.context(), nextIntent, null)
+                }
             }
         }
 
 
-    }
-    override fun onBackPressed() {
-        super.onBackPressed()
+
     }
 }

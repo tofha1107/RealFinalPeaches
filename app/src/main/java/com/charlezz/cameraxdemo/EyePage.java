@@ -21,7 +21,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
     private int settingTime;
     private int moveTime;
     private String distance;
-    int time;
+    int blink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
         intent = getIntent();
         distance = intent.getStringExtra("distance");
-//       settingTime = intent.getExtras().getInt("settingTime");
+        blink = intent.getExtras().getInt("blink");
         moveTime = 0;
 
         //moveTime = intent.getExtras().getInt("moveTime");
@@ -67,6 +67,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
 
             intent = new Intent(getApplicationContext(), step4_record.class);
             intent.putExtra("distance",distance);
+            intent.putExtra("blink",blink);
 
             timeResetClasss.eye_exe_receive = moveTime;
             Log.v("eye_exe_receive",timeResetClasss.eye_exe_receive+",");
@@ -80,7 +81,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 5*1000;
+            moveTime = 20*1000;
         }
 
         if (v.getId() == R.id.time10) {
@@ -89,7 +90,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 1000*30;
+            moveTime = 1000*60;
 
         }
 

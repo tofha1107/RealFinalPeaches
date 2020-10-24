@@ -25,6 +25,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private int settingTime;
     private Intent intent;
     private String distance;
+    int blink;
 
     private Timer timer;
 
@@ -52,8 +53,9 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
        // distance = intent.getExtras().getString("distance");
         distance = intent.getStringExtra("distance");
+        blink = intent.getExtras().getInt("blink");
 
-        Log.d("CameraXApp", "넘어온값"+ distance);
+        Log.d("CameraXApp", "넘어온값"+ distance+","+blink);
 
         settingTime = 0;
 
@@ -75,7 +77,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
 
             //10분을 밀리초로 환산한 값을 설정할 것.
-            settingTime = 1000*30; //30초
+            settingTime = 1000*120; //30초
         }
 
         if (v.getId() == R.id.button12) {
@@ -113,6 +115,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             }else{
                 intent = new Intent(getApplicationContext(), EyePage.class);
                 intent.putExtra("distance", distance);
+                intent.putExtra("blink", blink);
 
                 timeResetClasss.count_down_receive = settingTime;
 //            Log.d("count_down_receive", ""+timeResetClasss.count_down_receive);

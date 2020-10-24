@@ -33,7 +33,7 @@ public class step4_record extends AppCompatActivity {
     private final static String TAG = "step4_record";
     private final static int REQUESTCODE_RINGTONE_PICKER = 1000;
 
-    private int settingTime;
+    private int blink;
     private int moveTime;
 
     int time;
@@ -53,7 +53,7 @@ public class step4_record extends AppCompatActivity {
         intent = getIntent();
         //distance = intent.getExtras().getString("distance");
         distance = intent.getStringExtra("distance");
-//        settingTime = intent.getExtras().getInt("settingTime");
+        blink = intent.getExtras().getInt("blink");
 //        moveTime = intent.getExtras().getInt("moveTime");
 
 
@@ -86,9 +86,9 @@ public class step4_record extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(step4_record.this, ExecBeforePageActivity.class);
+                intent = new Intent(getApplicationContext(), ExecBeforePageActivity.class);
                 intent.putExtra("distance",distance);
-//                intent.putExtra("settingTime",settingTime);
+                intent.putExtra("blink",blink);
 //                intent.putExtra("moveTime", moveTime);
                 startActivity(intent);
             }
