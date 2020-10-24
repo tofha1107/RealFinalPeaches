@@ -142,7 +142,7 @@ class exerciseCamera : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
-    override fun onBackPressed() {}
+
 
     
     override fun onCreate(savedInstanceState: Bundle?) {

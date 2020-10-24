@@ -35,8 +35,10 @@ public class step4_record extends AppCompatActivity {
 
     private int settingTime;
     private int moveTime;
+
     int time;
     Intent intent;
+    String distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +51,10 @@ public class step4_record extends AppCompatActivity {
 
 
         intent = getIntent();
-        settingTime = intent.getExtras().getInt("settingTime");
-        moveTime = intent.getExtras().getInt("moveTime");
+        //distance = intent.getExtras().getString("distance");
+        distance = intent.getStringExtra("distance");
+//        settingTime = intent.getExtras().getInt("settingTime");
+//        moveTime = intent.getExtras().getInt("moveTime");
 
 
 //        Log.v("myValueTest", settingTime+"/"+moveTime);
@@ -83,8 +87,9 @@ public class step4_record extends AppCompatActivity {
             public void onClick(View v) {
 
                 intent = new Intent(step4_record.this, ExecBeforePageActivity.class);
-                intent.putExtra("settingTime",settingTime);
-                intent.putExtra("moveTime", moveTime);
+                intent.putExtra("distance",distance);
+//                intent.putExtra("settingTime",settingTime);
+//                intent.putExtra("moveTime", moveTime);
                 startActivity(intent);
             }
         });

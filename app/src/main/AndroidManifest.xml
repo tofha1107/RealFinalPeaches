@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".testtestttest" />
+
         <activity android:name=".CameraPage" />
         <activity android:name=".DistsancePage" />
         <activity android:name=".ExecBeforePageActivity" />
@@ -27,9 +27,8 @@
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".exerciseCamera" />
-        <activity android:name=".exerciseCamera_left">
-        </activity>
-        <activity android:name=".exerciseCamera_right"></activity>
+        <activity android:name=".exerciseCamera_left"/>
+        <activity android:name=".exerciseCamera_right"/>
         <activity android:name=".ClosePage" />
         <activity android:name=".step4_record" />
         <activity
@@ -56,6 +55,8 @@
         <activity
             android:name=".PlayVideo4"
             android:screenOrientation="landscape" />
+
+        <activity android:name=".PwPage"></activity>
     </application>
 
 </manifest>

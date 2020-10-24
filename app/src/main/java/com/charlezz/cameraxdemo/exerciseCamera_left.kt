@@ -156,6 +156,8 @@ class exerciseCamera_left : AppCompatActivity() {
         viewFinder.setTransform(matrix)
     }
 
+
+
     var xmlTextView : TextView? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -307,7 +309,6 @@ class exerciseCamera_left : AppCompatActivity() {
                                 Log.d("CameraXApp", "center_cnt 출력완료")
                                 if (center_cnt >= 3) {
 
-
                                     System.exit(0)
 
                                     val intent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
@@ -357,5 +358,8 @@ class exerciseCamera_left : AppCompatActivity() {
         }
 
 
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }
