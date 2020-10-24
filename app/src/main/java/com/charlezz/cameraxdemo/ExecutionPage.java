@@ -33,6 +33,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     int moveTime;
     private String distance;
     TextView blink_count;
+    int a=0;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -119,9 +120,15 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
 
         using_time_view = (TextView)findViewById(R.id.using_time_view);
+
+        Intent intent3 = getIntent();
+        a = intent3.getIntExtra("cam",0);
+        if (a == 0){
+            bun = (MILLISINFUTURE / (60*1000));
+            cho = (MILLISINFUTURE % (60 * 1000)) / 1000;
+        }
         countDownTimer();
         countDownTimer.start();
-
 
         end_imd_button = (Button)findViewById(R.id.end_imd_button);
         end_imd_button.setOnClickListener(this);
@@ -144,15 +151,25 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
         countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
-                using_time_view.setText(bun+"분"+cho+"초");
+
 //                bun = (count / (60*1000));
 //                cho = (count % (60 * 1000)) / 1000;
 
                 using_time_view.setText(bun+"분"+cho+"초");
-                 if (cho == 0){
-                 cho = 60;
-                 bun--;}
-                cho--;
+
+                if(a == 1){
+                    Log.v("초초초초초초초",""+cho+ ":" + a);
+                }else if(a == 0){
+                    if (cho == 0){
+                        cho = 60;
+                        bun--;
+                    }
+                    Log.v("초",""+cho+ ":" + a);
+                    cho--;
+                }
+
+
+
             }
             public void onFinish() {
                 using_time_view.setText(String.valueOf("시간이 끝났어요!"));
