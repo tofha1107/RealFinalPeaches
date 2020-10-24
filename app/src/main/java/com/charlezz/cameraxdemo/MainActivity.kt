@@ -40,7 +40,7 @@ private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 lateinit var obj: JSONObject
 
-var blink = 0;
+//var blink = 0;
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewFinder: TextureView
@@ -90,8 +90,8 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, DistsancePage::class.java)
             intent.putExtra("distance",""+obj.getString("dist"))
-            intent.putExtra("blink", blink)
-            timeResetClasss.blink_static_cnt = blink;
+//            intent.putExtra("blink", blink)
+//            timeResetClasss.blink_static_cnt = blink;
 
             startActivity(intent)
         }
@@ -160,6 +160,7 @@ class MainActivity : AppCompatActivity() {
 
 //        val intent = Intent(this, MainService::class.java)
 //        startService(intent)
+//        Log.d("MyService", "start")
     }
 
 
@@ -229,6 +230,7 @@ class MainActivity : AppCompatActivity() {
             // 매프레임을 계산하진 않고 1초마다 한번씩 정도 계산
             // if (currentTimestamp - lastAnalyzedTimestamp >= TimeUnit.SECONDS.toMillis(1)) {
             if (currentTimestamp - lastAnalyzedTimestamp >= 500) {
+                Log.d("hhd", "hhd2222_main")
                 var imgFormat = image.format
                 Log.d("CameraXApp", "imgFormat: $imgFormat")
 
@@ -252,17 +254,17 @@ class MainActivity : AppCompatActivity() {
                         {
                             obj = JSONObject(response)
                             val dist = obj.getString("dist")
-                            Log.d("CameraXApp",obj.getString("dist")+", "+obj.getString("blink"))
+//                            Log.d("CameraXApp",obj.getString("dist")+", "+obj.getString("blink"))
                             Log.d("CameraXApp","json출력완료")
                             instance?.xmlTextView?.setText(obj.getString("dist")+" CM")//
 
-                            val blink1 = obj.getString("blink")
+//                            val blink1 = obj.getString("blink")
 
-                            if(blink1.equals("1")) {
-                                blink += 1;
-                            }
+//                            if(blink1.equals("1")) {
+//                                blink += 1;
+//                            }
 
-                            Log.d("CameraXApp",""+blink+"회 누적")
+//                            Log.d("CameraXApp",""+blink+"회 누적")
                             //Log.d("CameraXApp","텍스트뷰출력완료")
 
 //                            if(Integer.parseInt(dist)<30){

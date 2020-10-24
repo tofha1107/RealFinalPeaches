@@ -50,4 +50,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
 
     implementation 'com.github.pedroSG94:AutoPermissions:1.0.3'
+    // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-service
+    compile group: 'androidx.lifecycle', name: 'lifecycle-service', version: '2.2.0'
+
 }

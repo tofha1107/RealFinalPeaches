@@ -39,7 +39,9 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
 
-
+        Intent i = new Intent(getApplicationContext(),MainService.class);
+        startService(i);
+        Log.d("MyService","startService22");
 //         거리값 가져오기
 //        intent = new Intent(getApplicationContext(), DistsancePage.class);
         //distance = intent.getExtras().getString("distance");
@@ -48,20 +50,19 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 //        blink2 = intent.getExtras().getInt("blink2");
         static_blink = timeResetClasss.blink_static_cnt;
 //        Log.d("CameraXApp","누적" + blink +"완료");
-//        Log.d("CameraXApp","스태틱에서" + static_blink);
+//        Log.d("CameraXApp","스태틱에서" + static_blink); 로그 안뜸
 
         blink_count = (TextView) findViewById(R.id.blink_cnt);
 
-        blink_count.setText(Integer.toString(static_blink));
-
-
-
+        blink_count.setText("" + static_blink);
+       // blink_count.setText(static_blink);
+       // Log.d("CamerXApp","익스큐션"+blink_count);
         // 시간설정값 가져오기
 //        intent = getIntent();
 
         //time = intent.getExtras().getInt("settingTime");
         time = timeResetClasss.count_down_receive;
-
+        Log.d("CamerXApp","타임"+time);
         // 눈운동 주기 가져오기
         //moveTime = intent.getExtras().getInt("moveTime");
         moveTime = timeResetClasss.eye_exe_receive;
@@ -144,7 +145,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 
         countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
-                using_time_view.setText(bun+"분"+cho+"초");
+                //using_time_view.setText(bun+"분"+cho+"초");
 //                bun = (count / (60*1000));
 //                cho = (count % (60 * 1000)) / 1000;
 

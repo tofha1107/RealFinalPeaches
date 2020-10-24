@@ -117,9 +117,10 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
             intent.putExtra("distance", distance);
-            intent.putExtra("blink", blink);
+//            intent.putExtra("blink", blink);
 //            intent.putExtra("moveTime", moveTime);
             startActivity(intent);
+
 
         }else if(v.getId() == R.id.reset_button){
             intent = new Intent(getApplicationContext(), DistsancePage.class);
