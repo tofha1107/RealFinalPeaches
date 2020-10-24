@@ -39,6 +39,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     Intent intent;
 
     String distance;
+    int blink;
     int settingTime; // 사용시간
     int moveTime; // 눈운동 주기
     int real_settingTime; // 눈 운동 주기 분으로 바꾼거
@@ -50,6 +51,11 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         intent = getIntent();
         distance = intent.getStringExtra("distance");
+        blink = intent.getExtras().getInt("blink");
+
+        Log.d("","누적" + blink +"완료");
+        Log.d("","누적 출력 완료");
+
         settingTime = timeResetClasss.count_down_receive;
         moveTime = timeResetClasss.eye_exe_receive;
 
@@ -69,10 +75,12 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
         button5.setText(String.valueOf(distance+"\nCM"));
 
         if(real_settingTime == 0){
-            button6.setText(String.valueOf("패쓰"));
+            button6.setText(String.valueOf("선택\n없음"));
         }else{
             button6.setText(String.valueOf(real_settingTime + "분 후"));
         }
+
+//        Log.d("blink","블링크값 : "+blink);
 
         //bind view
         mTextView = (TextView) findViewById(R.id.start_time);
@@ -109,18 +117,20 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
             intent = new Intent(getApplicationContext(), ExecutionPage.class);
             intent.putExtra("distance", distance);
-//            intent.putExtra("settingTime", settingTime);
+            intent.putExtra("blink", blink);
 //            intent.putExtra("moveTime", moveTime);
             startActivity(intent);
 
         }else if(v.getId() == R.id.reset_button){
             intent = new Intent(getApplicationContext(), DistsancePage.class);
             intent.putExtra("distance", distance);
+            intent.putExtra("blink", blink);
             startActivity(intent);
         }
         else if (v.getId() == R.id.button4) {
             intent = new Intent(this, videoList.class);
             intent.putExtra("distance", distance);
+            intent.putExtra("blink", blink);
             startActivity(intent);
         }
     }

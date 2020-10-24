@@ -125,11 +125,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/textView10"
             app:layout_constraintHorizontal_bias="0.144"
-            app:layout_constraintStart_toEndOf="@+id/textView22"
+            app:layout_constraintStart_toEndOf="@+id/blink_cnt2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/blink_cnt2"
             android:layout_width="134dp"
             android:layout_height="28dp"
             android:layout_marginTop="228dp"
@@ -144,7 +144,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/example"
             android:layout_width="260dp"
             android:layout_height="122dp"
             android:layout_marginBottom="128dp"

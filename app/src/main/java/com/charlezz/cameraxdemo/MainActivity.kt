@@ -38,8 +38,9 @@ import java.nio.ByteBuffer
 
 private const val REQUEST_CODE_PERMISSIONS = 10
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-private lateinit var obj: JSONObject
+lateinit var obj: JSONObject
 
+var blink = 0;
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewFinder: TextureView
@@ -89,6 +90,9 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this, DistsancePage::class.java)
             intent.putExtra("distance",""+obj.getString("dist"))
+            intent.putExtra("blink", blink)
+            timeResetClasss.blink_static_cnt = blink;
+
             startActivity(intent)
         }
 
@@ -144,11 +148,6 @@ class MainActivity : AppCompatActivity() {
         viewFinder = findViewById(R.id.view_finder)
         xmlTextView = findViewById(R.id.distance)
 
-//        button7.setOnClickListener {
-//            startActivity(Intent(this, distance::class.java))
-//            finish()
-//        }
-
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
         } else {
@@ -159,7 +158,11 @@ class MainActivity : AppCompatActivity() {
             updateTransform()
         }
 
+//        val intent = Intent(this, MainService::class.java)
+//        startService(intent)
     }
+
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -185,7 +188,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private class LuminosityAnalyzer : ImageAnalysis.Analyzer {
+    class LuminosityAnalyzer : ImageAnalysis.Analyzer {
         private var lastAnalyzedTimestamp = 0L
 
         /**
@@ -247,15 +250,25 @@ class MainActivity : AppCompatActivity() {
 
                         try
                         {
-
                             obj = JSONObject(response)
-//                            val dist = obj.getString("dist")
-
-                            Log.d("CameraXApp",obj.getString("dist"))
+                            val dist = obj.getString("dist")
+                            Log.d("CameraXApp",obj.getString("dist")+", "+obj.getString("blink"))
                             Log.d("CameraXApp","json출력완료")
-                            instance?.xmlTextView?.setText(obj.getString("dist")+" CM")
-//                            Log.d("CameraXApp","텍스트뷰출력완료")
+                            instance?.xmlTextView?.setText(obj.getString("dist")+" CM")//
 
+                            val blink1 = obj.getString("blink")
+
+                            if(blink1.equals("1")) {
+                                blink += 1;
+                            }
+
+                            Log.d("CameraXApp",""+blink+"회 누적")
+                            //Log.d("CameraXApp","텍스트뷰출력완료")
+
+//                            if(Integer.parseInt(dist)<30){
+//                                val intent = new Intent(getApplicationContext(), alarm)
+//                                startActivity(intent)
+//                            }
 
                         } catch (e: JSONException) {
                             e.printStackTrace()

@@ -115,6 +115,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
             recorder.prepare();
             recorder.start();
             Log.v("녹음시작",true+"");
+            Toast.makeText(this, "녹음을 시작해주세요!", Toast.LENGTH_LONG).show();
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,6 +130,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         recorder.release();
         recorder = null;
         Log.v("녹음중지",true+"");
+        Toast.makeText(this, "녹음을 중지했어요!", Toast.LENGTH_LONG).show();
         //녹음 저장하는 과정
         ContentValues values = new ContentValues(10);
 
@@ -160,6 +162,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
     public void startPlay() {
         killMediaPlayer();
 
+
         try {
             player = new MediaPlayer();
             player.setDataSource("file://" + filename);
@@ -174,6 +177,7 @@ public class audioRecord extends AppCompatActivity implements AutoPermissionsLis
         if (player != null) {
             player.stop();
         }
+
     }
 
     private void killMediaPlayer() {

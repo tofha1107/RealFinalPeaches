@@ -16,6 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".MainService"
+            android:enabled="true"
+            android:exported="true"></service>
+<!--        <service-->
+<!--            android:name=".Main"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true" />-->
 
         <activity android:name=".CameraPage" />
         <activity android:name=".DistsancePage" />
@@ -24,17 +32,16 @@
         <activity android:name=".EyePage" />
         <activity android:name=".JoinPage" />
         <activity android:name=".LoginPage" />
-        <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".exerciseCamera" />
-        <activity android:name=".exerciseCamera_left"/>
-        <activity android:name=".exerciseCamera_right"/>
+        <activity android:name=".exerciseCamera_left" />
+        <activity android:name=".exerciseCamera_right" />
         <activity android:name=".ClosePage" />
         <activity android:name=".step4_record" />
         <activity
             android:name=".audioRecord"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
-        <activity android:name=".LoadingPage" >
+        <activity android:name=".LoadingPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -55,8 +62,7 @@
         <activity
             android:name=".PlayVideo4"
             android:screenOrientation="landscape" />
-
-        <activity android:name=".PwPage"></activity>
+        <activity android:name=".PwPage" />
     </application>
 
 </manifest>

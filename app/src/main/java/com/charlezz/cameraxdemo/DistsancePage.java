@@ -25,6 +25,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
     private int settingTime;
     private Intent intent;
     private String distance;
+    int blink;
 
     private Timer timer;
 
@@ -52,8 +53,9 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
         intent = getIntent();
        // distance = intent.getExtras().getString("distance");
         distance = intent.getStringExtra("distance");
+        blink = intent.getExtras().getInt("blink");
 
-        Log.d("CameraXApp", "넘어온값"+ distance);
+        Log.d("CameraXApp", "넘어온값"+ distance+","+blink);
 
         settingTime = 0;
 
@@ -113,6 +115,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             }else{
                 intent = new Intent(getApplicationContext(), EyePage.class);
                 intent.putExtra("distance", distance);
+                intent.putExtra("blink", blink);
 
                 timeResetClasss.count_down_receive = settingTime;
 //            Log.d("count_down_receive", ""+timeResetClasss.count_down_receive);
