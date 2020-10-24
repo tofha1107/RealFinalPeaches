@@ -309,7 +309,6 @@ class exerciseCamera_left : AppCompatActivity() {
                                 Log.d("CameraXApp", "center_cnt 출력완료")
                                 if (center_cnt >= 3) {
 
-
                                     System.exit(0)
 
                                     val intent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)

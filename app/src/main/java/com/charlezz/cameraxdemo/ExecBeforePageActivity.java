@@ -43,17 +43,13 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     int moveTime; // 눈운동 주기
     int real_settingTime; // 눈 운동 주기 분으로 바꾼거
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.exec_before_page);
 
         intent = getIntent();
-        distance = intent.getExtras().getString("distance");
-        //Log.v("timetimetime",time+"ㅠㅠ");
+        distance = intent.getStringExtra("distance");
         settingTime = timeResetClasss.count_down_receive;
         moveTime = timeResetClasss.eye_exe_receive;
 
@@ -91,10 +87,7 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         real_start_button.setOnClickListener(this);
         button6.setOnClickListener(this);
-        reset_button.setOnClickListener(this);
-
-        go_eye = (Button) findViewById(R.id.button4);
-        go_eye.setOnClickListener(this);
+        button4.setOnClickListener(this);
     }
     private String getTime(){
         mNow = System.currentTimeMillis();
@@ -111,10 +104,6 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
 
-
-//      int age = intent.getExtras().getInt("age");
-//      int time = intent.getIntExtra("settingTime",0);
-
         if (v.getId() == R.id.real_start_button) {
             // 시간설정
 
@@ -126,9 +115,12 @@ public class ExecBeforePageActivity extends AppCompatActivity implements View.On
 
         }else if(v.getId() == R.id.reset_button){
             intent = new Intent(getApplicationContext(), DistsancePage.class);
+            intent.putExtra("distance", distance);
             startActivity(intent);
-        }else if (v.getId() == R.id.button4) {
+        }
+        else if (v.getId() == R.id.button4) {
             intent = new Intent(this, videoList.class);
+            intent.putExtra("distance", distance);
             startActivity(intent);
         }
     }

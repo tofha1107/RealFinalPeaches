@@ -44,7 +44,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
         time60.setOnClickListener(this);
 
         intent = getIntent();
-        distance = intent.getExtras().getString("distance");
+        distance = intent.getStringExtra("distance");
 //       settingTime = intent.getExtras().getInt("settingTime");
         moveTime = 0;
 

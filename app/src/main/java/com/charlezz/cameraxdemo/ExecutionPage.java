@@ -31,6 +31,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     Intent intent;
     int time;
     int moveTime;
+    private String distance;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -38,8 +39,8 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.execution_page);
 //         거리값 가져오기
         intent = getIntent();
-        time = intent.getExtras().getInt("distance");
-
+        //distance = intent.getExtras().getString("distance");
+        distance = intent.getStringExtra("distance");
 
         // 시간설정값 가져오기
 //        intent = getIntent();
@@ -62,7 +63,7 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
         TimerTask timerTask2 = new TimerTask() {
             @Override
             public void run() { // TimerTask 2개 실행
-                intent = new Intent(getApplicationContext(),exerciseCamera_left.class);
+                intent = new Intent(getApplicationContext(), exerciseCamera_left.class);
                 startActivity(intent);
             }
         };

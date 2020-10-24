@@ -87,26 +87,6 @@ class MainActivity : AppCompatActivity() {
         //버튼 클릭 이벤트
         findViewById<AppCompatButton>(R.id.capture_button).setOnClickListener {
 
-//            val file = File(externalMediaDirs.first(),
-//                "${System.currentTimeMillis()}.jpg")
-//            imageCapture.takePicture(file,
-//                object : ImageCapture.OnImageSavedListener {
-//                    override fun onError(error: ImageCapture.UseCaseError,
-//                                         message: String, exc: Throwable?) {
-//                        val msg = "Photo capture failed: $message"
-//                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-//                        Log.e("CameraXApp", msg)
-//                        exc?.printStackTrace()
-//                    }
-//
-//                    override fun onImageSaved(file: File) {
-//                        val msg = "사진 경로 : ${file.absolutePath}"
-//                        Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
-//                        Log.d("CameraXApp", msg)
-////                        Log.d("CameraXApp", ""+obj.getString("dist"))
-//                    }
-//                })
-//            화면전환 기능
             val intent = Intent(this, DistsancePage::class.java)
             intent.putExtra("distance",""+obj.getString("dist"))
             startActivity(intent)

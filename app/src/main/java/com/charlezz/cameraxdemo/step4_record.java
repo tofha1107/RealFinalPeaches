@@ -51,7 +51,8 @@ public class step4_record extends AppCompatActivity {
 
 
         intent = getIntent();
-        distance = intent.getExtras().getString("distance");
+        //distance = intent.getExtras().getString("distance");
+        distance = intent.getStringExtra("distance");
 //        settingTime = intent.getExtras().getInt("settingTime");
 //        moveTime = intent.getExtras().getInt("moveTime");
 
