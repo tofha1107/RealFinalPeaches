@@ -44,15 +44,15 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
 //        intent = new Intent(getApplicationContext(), DistsancePage.class);
         //distance = intent.getExtras().getString("distance");
 //        distance = intent.getStringExtra("distance");
-        intent = getIntent();
-        blink = intent.getExtras().getInt("blink");
-//        static_blink = timeResetClasss.blink_static_cnt;
+//        intent = getIntent();
+//        blink2 = intent.getExtras().getInt("blink2");
+        static_blink = timeResetClasss.blink_static_cnt;
 //        Log.d("CameraXApp","누적" + blink +"완료");
 //        Log.d("CameraXApp","스태틱에서" + static_blink);
 
         blink_count = (TextView) findViewById(R.id.blink_cnt);
 
-        blink_count.setText(Integer.toString(blink));
+        blink_count.setText(Integer.toString(static_blink));
 
 
 

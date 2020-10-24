@@ -81,7 +81,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 5*1000;
+            moveTime = 20*1000;
         }
 
         if (v.getId() == R.id.time10) {

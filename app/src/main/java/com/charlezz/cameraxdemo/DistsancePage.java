@@ -77,7 +77,7 @@ public class DistsancePage extends AppCompatActivity implements View.OnClickList
             button14.setBackground(this.getResources().getDrawable(R.drawable.light_30));
 
             //10분을 밀리초로 환산한 값을 설정할 것.
-            settingTime = 1000*30; //30초
+            settingTime = 1000*120; //30초
         }
 
         if (v.getId() == R.id.button12) {
