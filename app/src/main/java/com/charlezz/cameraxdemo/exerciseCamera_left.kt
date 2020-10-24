@@ -391,9 +391,8 @@ class exerciseCamera_left : AppCompatActivity() {
                     //exerciseCamera_left.instance?.xmlTextView?.setText("운동완료")
                     val nextIntent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    nextIntent.putExtra("cam", 1)
+//                    nextIntent.putExtra("cam", "1")
                     startActivity(exerciseCamera_left.context(), nextIntent, null)
-//                    System.exit(0);
                 }
             }
         }

@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,15 +16,15 @@ import java.util.TimerTask;
 public class ExecutionPage extends AppCompatActivity implements View.OnClickListener {
 
     //MILLISINFUTURE과 COUNT 함께 설정
-    private static int MILLISINFUTURE = 10*1000;
+//    private static int MILLISINFUTURE;
     private static int bun;
     private static int cho;
     private static final int COUNT_DOWN_INTERVAL = 1000;
-    private int count = 10;
+//    private int count = 10;
     private Button end_imd_button;
     private TextView using_time_view ;
-    private CountDownTimer countDownTimer;
-    private Timer timer, timer2, timer3;
+    private CountDownTimer cdt;
+    private Timer timer;
     Intent intent;
     int blink;
     int static_blink;
@@ -33,103 +32,61 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     int moveTime;
     private String distance;
     TextView blink_count;
-    int a=0;
+//    String a = "0";
+
+    TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() { // TimerTask 1번째 : ClosePage로 가기
+            intent = new Intent(getApplicationContext(),ClosePage.class);
+            startActivity(intent);
+        }
+    };
+
+    TimerTask timerTask2 = new TimerTask() {
+        @Override
+        public void run() { // TimerTask 2번째 : 눈운동 페이지로 가기
+            intent = new Intent(getApplicationContext(), exerciseCamera_left.class);
+            startActivity(intent);
+        }
+    };
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.execution_page);
 
-
-//         거리값 가져오기
-//        intent = new Intent(getApplicationContext(), DistsancePage.class);
-        //distance = intent.getExtras().getString("distance");
-//        distance = intent.getStringExtra("distance");
-//        intent = getIntent();
-//        blink2 = intent.getExtras().getInt("blink2");
-        static_blink = timeResetClasss.blink_static_cnt;
-//        Log.d("CameraXApp","누적" + blink +"완료");
-//        Log.d("CameraXApp","스태틱에서" + static_blink);
-
-        blink_count = (TextView) findViewById(R.id.blink_cnt);
-
-        blink_count.setText(Integer.toString(static_blink));
-
-
-
-        // 시간설정값 가져오기
-//        intent = getIntent();
-
-        //time = intent.getExtras().getInt("settingTime");
-        time = timeResetClasss.count_down_receive;
-
-        // 눈운동 주기 가져오기
-        //moveTime = intent.getExtras().getInt("moveTime");
-        moveTime = timeResetClasss.eye_exe_receive;
-
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                intent = new Intent(getApplicationContext(),ClosePage.class);
-                startActivity(intent);
-            }
-        };
-
-
-        TimerTask timerTask2 = new TimerTask() {
-            @Override
-            public void run() { // TimerTask 2개 실행
-                intent = new Intent(getApplicationContext(), exerciseCamera_left.class);
-                startActivity(intent);
-            }
-        };
-
-
-        TimerTask timerTask3 = new TimerTask() {
-            @Override
-            public void run() {
-                Toast.makeText(ExecutionPage.this, "로그인실패 문구", Toast.LENGTH_LONG).show();
-            }
-        };
-
-
-        timer = new Timer();
-        timer2 = new Timer();
-        timer3 = new Timer();
-
-        timer.schedule(timerTask, time);
-
-        if(moveTime == 0){
-
-
-        }else {
-            timer2.schedule(timerTask2, moveTime);
-        }
-
-//        timer2 = new Timer();
-//        timer.schedule(timerTask, moveTime);
-        Log.v("타이머","실행");
-
-        // 카운트 다운 숫자랑 시간 설정하기 -> 보여지는 숫자 : count / 실제 시간 : MILLISINFUTURE / time 나누기 1000 = 초
-
-        MILLISINFUTURE = time;
-        count = time;
-        Log.v("받아온시간",""+count);
-        bun = (MILLISINFUTURE / (60*1000));
-        cho = (MILLISINFUTURE % (60 * 1000)) / 1000;
-
-
         using_time_view = (TextView)findViewById(R.id.using_time_view);
 
-        Intent intent3 = getIntent();
-        a = intent3.getIntExtra("cam",0);
-        if (a == 0){
-            bun = (MILLISINFUTURE / (60*1000));
-            cho = (MILLISINFUTURE % (60 * 1000)) / 1000;
-        }
-        countDownTimer();
-        countDownTimer.start();
+        static_blink = timeResetClasss.blink_static_cnt;
+        blink_count = (TextView) findViewById(R.id.blink_cnt);
+        blink_count.setText(Integer.toString(static_blink));
 
+        time = timeResetClasss.count_down_receive;
+        moveTime = timeResetClasss.eye_exe_receive;
+
+        timer = new Timer();
+
+        timer.schedule(timerTask, time);
+        if(moveTime != 0){
+            timer.schedule(timerTask2, moveTime);
+        }
+
+//        카운트 다운 숫자랑 시간 설정하기 -> 보여지는 숫자 : count / 실제 시간 : MILLISINFUTURE / time 나누기 1000 = 초
+
+        bun = (time / (60*1000));
+        cho = (time % (60 * 1000)) / 1000;
+
+        countDownTimer();
+        cdt.start();
+
+//        if (a.equals("1")){
+//        Intent intent3 = getIntent();
+//        a = intent3.getStringExtra("cam");
+            timeResetClasss.count_down_receive = time;
+//            cdt.cancel();
+//            cdt.onFinish();
+//        }
         end_imd_button = (Button)findViewById(R.id.end_imd_button);
         end_imd_button.setOnClickListener(this);
 
@@ -149,27 +106,17 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     }
     public void countDownTimer(){
 
-        countDownTimer = new CountDownTimer(MILLISINFUTURE, COUNT_DOWN_INTERVAL) {
+        cdt = new CountDownTimer(timeResetClasss.count_down_receive, COUNT_DOWN_INTERVAL) {
             public void onTick(long millisUntilFinished) {
-
-//                bun = (count / (60*1000));
-//                cho = (count % (60 * 1000)) / 1000;
 
                 using_time_view.setText(bun+"분"+cho+"초");
 
-                if(a == 1){
-                    Log.v("초초초초초초초",""+cho+ ":" + a);
-                }else if(a == 0){
                     if (cho == 0){
                         cho = 60;
                         bun--;
                     }
-                    Log.v("초",""+cho+ ":" + a);
+                    Log.v("초",""+cho+ ":" );
                     cho--;
-                }
-
-
-
             }
             public void onFinish() {
                 using_time_view.setText(String.valueOf("시간이 끝났어요!"));
@@ -181,9 +128,9 @@ public class ExecutionPage extends AppCompatActivity implements View.OnClickList
     public void onDestroy() {
         super.onDestroy();
         try{
-            countDownTimer.cancel();
+            cdt.cancel();
         } catch (Exception e) {}
-        countDownTimer=null;
+        cdt =null;
     }
 
 

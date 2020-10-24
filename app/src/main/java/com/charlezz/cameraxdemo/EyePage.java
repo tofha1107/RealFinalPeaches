@@ -81,7 +81,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 10*1000;
+            moveTime = 5*60*1000;
         }
 
         if (v.getId() == R.id.time10) {
@@ -90,17 +90,7 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            moveTime = 1000*60;
-
-        }
-
-        if (v.getId() == R.id.time60) {
-            //btn_choose10.setBackground(Drawable);
-            time60.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
-            time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
-            time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
-            time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
-            moveTime = 60*60*1000;
+            moveTime = 10*60*1000;
         }
 
         if (v.getId() == R.id.time20) {
@@ -110,6 +100,15 @@ public class EyePage extends AppCompatActivity implements View.OnClickListener {
             time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
             time60.setBackground(this.getResources().getDrawable(R.drawable.light_60));
             moveTime = 20*60*1000;
+        }
+
+        if (v.getId() == R.id.time60) {
+            //btn_choose10.setBackground(Drawable);
+            time60.setBackground(this.getResources().getDrawable(R.drawable.dark_60));
+            time5.setBackground(this.getResources().getDrawable(R.drawable.light_5));
+            time20.setBackground(this.getResources().getDrawable(R.drawable.light_20));
+            time10.setBackground(this.getResources().getDrawable(R.drawable.light_10));
+            moveTime = 60*60*1000;
         }
     }
 
