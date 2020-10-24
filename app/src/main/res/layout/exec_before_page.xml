@@ -29,7 +29,7 @@
 
     <Button
         android:id="@+id/real_start_button"
-        android:layout_width="180dp"
+        android:layout_width="199dp"
         android:layout_height="61dp"
         android:background="@color/colorTitlePink"
         android:fontFamily="@font/tmoneyroundwindextrabold"
@@ -37,6 +37,8 @@
         android:textColor="@color/colorLightBeige"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -103,16 +105,17 @@
         android:id="@+id/start_time"
         android:layout_width="134dp"
         android:layout_height="52dp"
-        android:layout_marginStart="36dp"
         android:layout_marginBottom="40dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
         android:text="11:20"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/real_start_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.607" />
+        app:layout_constraintVertical_bias="0.625" />
 
     <TextView
         android:id="@+id/textView14"
@@ -122,18 +125,17 @@
         android:text="시작-종료시간"
         android:textColor="@color/colorTitlePink"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/real_start_button"
-        app:layout_constraintEnd_toEndOf="@+id/button6"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.717" />
 
     <TextView
         android:id="@+id/end_time"
         android:layout_width="134dp"
         android:layout_height="52dp"
-        android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
@@ -141,12 +143,14 @@
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/real_start_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/start_time"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/reset_button"
-        android:layout_width="180dp"
+        android:layout_width="183dp"
         android:layout_height="61dp"
         android:background="@color/colorSemiDarkGray"
         android:fontFamily="@font/tmoneyroundwindextrabold"
@@ -156,29 +160,33 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/real_start_button" />
+        app:layout_constraintStart_toEndOf="@+id/real_start_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
         android:layout_marginBottom="28dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="제한 거리"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.322"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView29"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
         android:layout_marginBottom="28dp"
         android:fontFamily="@font/tmoneyroundwindextrabold"
         android:text="눈 운동 시작 시간"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/textView14"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.687"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

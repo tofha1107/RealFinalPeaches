@@ -18,28 +18,34 @@
         android:usesCleartextTraffic="true">
 
         <activity android:name=".CameraPage" />
-        <activity android:name=".DistsancePage" />
+        <activity android:name=".DistsancePage">
+
+        </activity>
         <activity android:name=".ExecBeforePageActivity" />
         <activity android:name=".ExecutionPage" />
         <activity android:name=".EyePage" />
         <activity android:name=".JoinPage" />
-        <activity android:name=".LoginPage" />
+        <activity android:name=".LoginPage" >
+
+        </activity>
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity" />
         <activity android:name=".exerciseCamera" />
         <activity android:name=".exerciseCamera_left"/>
         <activity android:name=".exerciseCamera_right"/>
         <activity android:name=".ClosePage" />
-        <activity android:name=".step4_record" />
+        <activity android:name=".step4_record" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".audioRecord"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity android:name=".LoadingPage" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".videoList" />
         <activity android:name=".AlarmTest" />

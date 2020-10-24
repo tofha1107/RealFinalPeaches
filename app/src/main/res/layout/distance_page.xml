@@ -27,7 +27,7 @@
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.643"
+            app:layout_constraintHorizontal_bias="0.656"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.118" />
@@ -42,7 +42,7 @@
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button12"
-            app:layout_constraintHorizontal_bias="0.485"
+            app:layout_constraintHorizontal_bias="0.788"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.118" />
@@ -71,11 +71,11 @@
             android:textColor="@color/colorLightBeige"
             android:textSize="40sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/button12"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.189"
             app:layout_constraintStart_toEndOf="@+id/button14"
             app:layout_constraintTop_toBottomOf="@+id/button12"
-            app:layout_constraintVertical_bias="0.448" />
+            app:layout_constraintVertical_bias="0.482" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -111,13 +111,13 @@
         android:layout_height="53dp"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/tmoneyroundwindregular"
-        android:text="스마트폰 사용 시간을 정해볼까요?"
         android:gravity="center"
+        android:lineSpacingExtra ="5dp"
+        android:text="스마트폰 사용 시간을 정해볼까요?"
         android:textColor="@color/colorTitlePink"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
-        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -138,12 +138,12 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="252dp"
-        android:layout_height="88dp"
+        android:layout_width="251dp"
+        android:layout_height="93dp"
         android:layout_marginBottom="4dp"
         android:fontFamily="@font/tmoneyroundwindregular"
         android:gravity="center"
-        android:lineSpacingExtra ="5dp"
+        android:lineSpacingExtra="5dp"
         android:text="설정한 시간 동안 눈보호 어플을 이용하실 수 있어요"
         android:textColor="@color/colorTitlePink"
         android:textSize="22sp"
