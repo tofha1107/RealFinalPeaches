@@ -22,7 +22,11 @@ public class CameraPage extends AppCompatActivity implements View.OnClickListene
         face_button.setOnClickListener(this);
 
     }
+    @Override
+    public void onBackPressed()
+    {
 
+    }
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.face_button){

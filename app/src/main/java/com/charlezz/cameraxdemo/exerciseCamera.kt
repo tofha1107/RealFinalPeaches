@@ -328,4 +328,6 @@ class exerciseCamera : AppCompatActivity() {
             }
         }
     }
+
+
 }

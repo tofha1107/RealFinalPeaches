@@ -382,15 +382,16 @@ class exerciseCamera_left : AppCompatActivity() {
         }
 
         private fun blinking(gaze_state: String){
-            if (gaze_state.equals("Blinking")) {
+            if (gaze_state.equals("Looking center")) {
                 blink_cnt += 1;
                 Log.d("CameraXApp", " " + blink_cnt);
                 Log.d("CameraXApp", "blinking 출력완료")
 
-                if (blink_cnt >= 8) {
+                if (blink_cnt >= 2) {
                     //exerciseCamera_left.instance?.xmlTextView?.setText("운동완료")
                     val nextIntent = Intent(exerciseCamera_left.context(), ExecutionPage::class.java)
                     nextIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    nextIntent.putExtra("cam", "1")
                     startActivity(exerciseCamera_left.context(), nextIntent, null)
                 }
             }
